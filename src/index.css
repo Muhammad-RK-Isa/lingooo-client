@@ -1,0 +1,23 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&family=Pacifico&display=swap');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+    .btn {
+        @apply flex items-center justify-center rounded px-4 py-2 text-2xl text-black
+    }
+
+    .btn-primary {
+        @apply bg-primary hover:shadow-2xl hover:shadow-primary hover:drop-shadow-2xl duration-200 hover:-translate-y-1
+    }
+
+    .btn-secondary {
+        @apply bg-secondary hover:-translate-y-1 duration-200
+    }
+
+    .btn-sm {
+        @apply px-4 py-1 text-base
+    }
+
+}
