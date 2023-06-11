@@ -5,6 +5,7 @@ import Footer from '../../Shared/Footer/Footer';
 import ClassesGrid from './ClassesGrid';
 import InstructorsGrid from './InstructorsGrid';
 import Communities from './Communities';
+import ReviewsSection from './ReviewsSection';
 
 const Home = () => {
     return (
@@ -16,8 +17,9 @@ const Home = () => {
             <div className='max-w-screen-2xl mx-2 lg:mx-auto'>
                 <ClassesGrid />
                 <InstructorsGrid />
-                <Communities/>
             </div>
+            <ReviewsSection />
+            <Communities />
             <Footer />
         </div>
     );

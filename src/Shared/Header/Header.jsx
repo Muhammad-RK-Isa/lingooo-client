@@ -37,12 +37,12 @@ const Header = () => {
         window.addEventListener( 'scroll', () => {
             const nav = navRef.current;
             if ( window.scrollY > 30 ) {
-                nav.classList.add( 'bg-white', 'shadow-md', 'drop-shadow-md', 'dark:bg-black' );
+                nav.classList.add( 'bg-white', 'shadow-md', 'drop-shadow-md', 'dark:bg-black', 'dark:bg-opacity-50', 'dark:backdrop-blur' );
                 nav.classList.replace( 'text-white', 'text-black' );
                 nav.classList.replace( 'text-white', 'text-black' );
                 setBrandLogo( logo );
             } else {
-                nav.classList.remove( 'bg-white', 'shadow-md', 'drop-shadow-md', 'dark:bg-black' );
+                nav.classList.remove( 'bg-white', 'shadow-md', 'drop-shadow-md', 'dark:bg-black', 'dark:bg-opacity-50', 'dark:backdrop-blur' );
                 nav.classList.replace( 'text-black', 'text-white' );
                 setBrandLogo( logo_white );
             }
@@ -51,8 +51,8 @@ const Header = () => {
 
 
     return (
-        <header className="w-full bg-gradient-to-b from-primary to-secondary 00c9b7] dark:via-[#00c9b780] dark:to-[#000000] pb-10 lg:pb-20">
-            <nav ref={ navRef } className="w-full fixed top-0 z-20 text-white dark:text-white dark:backdrop-blur dark:bg-black dark:bg-opacity-50 duration-200 pl-2 pr-4 lg:p-0">
+        <header className="w-full bg-gradient-to-b from-primary to-secondary pb-16 lg:pb-20" >
+            <nav ref={ navRef } className="w-full fixed top-0 z-20 text-white dark:text-white  duration-200 pl-2 pr-4 lg:p-0">
                 <div className="flex items-center justify-between gap-8 w-full h-16 max-w-screen-xl mx-auto lg:py-2 box-content">
                     <div className="hidden lg:flex gap-8 items-center">
                         <Link

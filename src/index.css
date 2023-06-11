@@ -3,21 +3,61 @@
 @tailwind components;
 @tailwind utilities;
 
-@layer components {
-    .btn {
-        @apply flex items-center justify-center rounded px-4 py-2 text-2xl text-black
-    }
+.dark header {
+    background: linear-gradient(180deg, rgba(91, 112, 249, 0.9) 0%, rgba(0, 201, 183, 0.28) 65.42%, rgba(0, 201, 183, 0) 100%) !important;
+}
 
-    .btn-primary {
-        @apply bg-primary hover: shadow-2xl hover:shadow-primary hover:drop-shadow-2xl duration-200 hover:-translate-y-1
-    }
+.message-icon::before {
+    content: "";
+    position: absolute;
+    bottom: -14.5px;
+    left: 2rem;
+    width: 0;
+    height: 0;
+    border-left: 15px solid transparent;
+    border-right: 15px solid transparent;
+    border-top: 15px solid white;
+}
+.dark .message-icon::before {
+    border-top: 15px solid rgba(255, 255, 255, 0.8)
+}
 
-    .btn-secondary {
-        @apply bg-secondary hover: -translate-y-1 duration-200
-    }
+.reviews-swiper .swiper-pagination-bullet {
+    width: 8px;
+    height: 8px;
+    text-align: center;
+    line-height: 20px;
+    font-size: 12px;
+    color: #000;
+    opacity: 0.5;
+    background: white;
+}
 
-    .btn-sm {
-        @apply px-4 py-1 text-base
-    }
+.reviews-swiper .swiper-pagination-bullet-active {
+    color: #fff;
+    background: white;
+    opacity: 1;
+}
 
+.instructors-swiper .swiper-pagination-bullet-active {
+    color: #5b70f9;
+    background: #5b70f9;
+    opacity: 1;
+}
+
+.dark .instructors-swiper .swiper-pagination-bullet {
+    width: 8px;
+    height: 8px;
+    text-align: center;
+    line-height: 20px;
+    font-size: 12px;
+    color: #000;
+    opacity: 0.5;
+    background: white;
+}
+
+.dark .instructors-swiper .swiper-pagination-bullet-active {
+    color: #fff;
+    background: white;
+    opacity: 1;
 }

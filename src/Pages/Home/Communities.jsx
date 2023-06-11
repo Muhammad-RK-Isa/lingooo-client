@@ -128,7 +128,7 @@ const australianCountries = [
 
 const Communities = () => {
     return (
-        <>
+        <div className='max-w-screen-2xl mx-2 lg:mx-auto'>
             <div className="mb-10 lg:mb-14 text-center max-w-xs lg:max-w-2xl mx-auto">
                 <h2 className='text-xl lg:text-2xl font-semibold mt-20 mb-4 mx-2'>Join our global community</h2>
                 <p>We provide the best service that comes with the best results.</p>
@@ -165,7 +165,7 @@ const Communities = () => {
                 <div className='flex flex-col gap-4 text-lg lg:text-xl'>
                     <h3 className='font-semibold text-right lg:text-left'>European</h3>
                     {
-                        asianCountries.map( ( { flag, name } ) => {
+                        europeanCountries.map( ( { flag, name } ) => {
                             return (
                                 <div key={ name } className='inline-flex gap-2 items-center justify-end lg:justify-normal'>
                                     <img src={ flag } alt="name" className='h-3 rounded-sm lg:h-5 lg:rounded' />
@@ -178,7 +178,7 @@ const Communities = () => {
                 <div className='flex flex-col gap-4 text-lg lg:text-xl'>
                     <h3 className='font-semibold'>Africa</h3>
                     {
-                        asianCountries.map( ( { flag, name } ) => {
+                        africanCountries.map( ( { flag, name } ) => {
                             return (
                                 <div key={ name } className='inline-flex gap-2 items-center'>
                                     <img src={ flag } alt="name" className='h-3 rounded-sm lg:h-5 lg:rounded' />
@@ -191,9 +191,9 @@ const Communities = () => {
                 <div className='col-span-2 lg:col-span-1 flex flex-col gap-4 text-lg lg:text-xl'>
                     <h3 className='font-semibold text-center lg:text-left'>Austrlia</h3>
                     {
-                        asianCountries.map( ( { flag, name } ) => {
+                        australianCountries.map( ( { flag, name }, idx ) => {
                             return (
-                                <div key={ name } className='inline-flex gap-2 items-center justify-center lg:justify-normal'>
+                                <div key={ idx } className='inline-flex gap-2 items-center justify-center lg:justify-normal'>
                                     <img src={ flag } alt="name" className='h-5 rounded' />
                                     <span className='text-sm lg:text-base'>{ name }</span>
                                 </div>
@@ -202,7 +202,7 @@ const Communities = () => {
                     }
                 </div>
             </div>
-        </>
+        </div>
     );
 };
 

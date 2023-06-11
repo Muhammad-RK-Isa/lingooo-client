@@ -11,7 +11,7 @@ const InstructorsGrid = () => {
             <div className="mb-10 lg:mb-14 text-center max-w-xs lg:max-w-2xl mx-auto">
                 <h2 className='text-xl lg:text-2xl font-semibold mt-20 mb-4 mx-2'>Meet Our Instructors</h2>
                 <p>We provide the best service that comes with the best results.</p>
-                <hr className="w-28 lg:w-32 mx-auto border-primary border-2 mt-6"/>
+                <hr className="w-28 lg:w-32 mx-auto border-primary border-2 mt-6" />
             </div>
 
             <Swiper
@@ -21,9 +21,10 @@ const InstructorsGrid = () => {
                     clickable: true,
                     // Autoplay: true
                 } }
+                loop={true}
                 modules={ [ Pagination ] }
-                className="hidden lg:flex pb-12"
-            >
+                className="hidden lg:flex pb-12 instructors-swiper"
+                >
                 <SwiperSlide>
                     <InstructorCardMin />
                 </SwiperSlide>
@@ -46,13 +47,14 @@ const InstructorsGrid = () => {
 
             <Swiper
                 slidesPerView={ 3 }
-                spaceBetween={ 4 }
+                spaceBetween={ 6 }
                 pagination={ {
                     clickable: true,
                     // Autoplay: true
                 } }
+                loop={true}
                 modules={ [ Pagination ] }
-                className="flex lg:hidden pb-12"
+                className="flex lg:hidden pb-12 instructors-swiper"
             >
                 <SwiperSlide>
                     <InstructorCardMin />
@@ -73,14 +75,6 @@ const InstructorsGrid = () => {
                     <InstructorCardMin />
                 </SwiperSlide>
             </Swiper>
-
-            {/* <div className='grid grid-cols-2 lg:grid-cols-6 gap-2 lg:gap-4'>
-                <InstructorCardMin />
-                <InstructorCardMin />
-                <InstructorCardMin />
-                <InstructorCardMin />
-                <InstructorCardMin />
-            </div> */}
         </>
     );
 };

@@ -9,7 +9,7 @@ const InstructorCardMin = ( { data } ) => {
                 <img
                     src="https://images.unsplash.com/photo-1499696010180-025ef6e1a8f9?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80"
                     alt="instructor"
-                    className="rounded-full w-14 h-14 lg:w-20 lg:h-20 mx-auto mt-2 lg:mt-4"
+                    className="rounded-full w-14 h-14 lg:w-20 lg:h-20 mx-auto mt-4"
                 />
                 <CardBody className="m-0 p-4 z-10 -mt-2 text-center">
                     <p className="lg:text-lg font-semibold">Dr. Mathew</p>

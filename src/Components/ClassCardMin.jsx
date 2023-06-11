@@ -28,16 +28,12 @@ const ClassCardMin = ( { data } ) => {
 
     const [ ref, inView ] = useInView( {
         triggerOnce: true,
-        threshold: 0.2, // Adjust the threshold as needed
+        threshold: 0.2,
     } );
     // const { _id, title, image, price, language } = data;
 
     return (
-        <motion.div
-            ref={ ref }
-            initial="hidden"
-            animate={ inView ? 'visible' : 'hidden' }
-            variants={ variants }
+        <motion.div ref={ ref } initial="hidden" animate={ inView ? 'visible' : 'hidden' } variants={ variants }
         >
             <Card className="w-full max-w-[26rem] shadow-lg rounded-lg overflow-hidden dark:bg-opacity-90 dark:text-black">
                 <CardHeader floated={ false } color="blue-gray" className="m-2 rounded-lg z-10">
