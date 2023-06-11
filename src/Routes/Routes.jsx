@@ -6,6 +6,8 @@ import Dashboard from '../Layouts/Dashboard/Dashboard';
 import Dashboard_Student from '../Pages/Dashboard/Dashboard_Student/Dashboard_Student';
 import Dashboard_Instructor from '../Pages/Dashboard/Dashboard_Instructor/Dashboard_Instructor';
 import Dashboard_Admin from '../Pages/Dashboard/Dashboard_Admin/Dashboard_Admin';
+import Login from "../Pages/Login/Login";
+import Registration from './../Pages/Registration/Registration';
 
 const routes = createBrowserRouter( [
     {
@@ -23,6 +25,14 @@ const routes = createBrowserRouter( [
             {
                 path: '/error',
                 element: <Error />
+            },
+            {
+                path: '/login',
+                element: <Login />
+            },
+            {
+                path: '/registration',
+                element: <Registration />
             }
         ]
     },

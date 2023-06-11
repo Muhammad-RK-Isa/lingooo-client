@@ -5,7 +5,7 @@ import {
 
 const InstructorCardMin = ( { data } ) => {
     return (
-            <Card className="w-full max-w-[26rem] shadow-lg drop-shadow-sm hover:shadow-primary hover:shadow hover:border-secondary hover:border duration-300 rounded-lg overflow-hidden dark:bg-opacity-90 dark:text-black">
+            <Card className="w-full lg:max-w-[20rem] shadow-lg drop-shadow-sm hover:shadow-primary hover:shadow hover:border-secondary hover:border duration-300 rounded-lg overflow-hidden dark:bg-opacity-90 dark:text-black">
                 <img
                     src="https://images.unsplash.com/photo-1499696010180-025ef6e1a8f9?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80"
                     alt="instructor"

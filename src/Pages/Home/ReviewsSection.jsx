@@ -1,6 +1,6 @@
 import React from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { Pagination, Autoplay } from "swiper";
+import { Pagination } from "swiper";
 import ReviewCard from '../../Components/ReviewCard';
 
 const ReviewsSection = () => {
@@ -17,24 +17,19 @@ const ReviewsSection = () => {
                     pagination={ {
                         clickable: true,
                     } }
-                    loop
-                    autoplay={ {
-                        delay: 2500,
-                        disableOnInteraction: false,
-                    } }
-                    modules={ [ Pagination, Autoplay ] }
+                    loop={ true }
+                    modules={ [ Pagination ] }
                     breakpoints={ {
-                        768: {
-                            slidesPerView: 1,
-                            spaceBetween: 4,
-                        },
                         1024: {
                             slidesPerView: 3,
-                            spaceBetween: 10,
-                        },
+                            spaceBetween: 30,
+                        }
                     } }
                     className="pb-12 lg:pb-20 reviews-swiper"
                 >
+                    <SwiperSlide>
+                        <ReviewCard />
+                    </SwiperSlide>
                     <SwiperSlide>
                         <ReviewCard />
                     </SwiperSlide>

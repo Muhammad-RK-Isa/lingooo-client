@@ -1,9 +1,10 @@
-import React, { useRef, useState } from "react";
+import React from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/pagination";
-import { Pagination } from "swiper";
+import { Navigation, Pagination } from "swiper";
 import InstructorCardMin from '../../Components/InstructorCardMin';
+import { RiArrowDropLeftLine, RiArrowDropRightLine } from 'react-icons/ri';
 
 const InstructorsGrid = () => {
     return (
@@ -15,16 +16,21 @@ const InstructorsGrid = () => {
             </div>
 
             <Swiper
-                slidesPerView={ 4 }
-                spaceBetween={ 16 }
+                slidesPerView={ 3 }
+                spaceBetween={ 6 }
                 pagination={ {
                     clickable: true,
-                    // Autoplay: true
                 } }
-                loop={true}
-                modules={ [ Pagination ] }
-                className="hidden lg:flex pb-12 instructors-swiper"
-                >
+                loop
+                modules={ [ Pagination, Navigation ] }
+                breakpoints={ {
+                    1024: {
+                        slidesPerView: 3,
+                        spaceBetween: 30,
+                    }
+                } }
+                className="pb-12 instructors-swiper lg:max-w-6xl relative"
+            >
                 <SwiperSlide>
                     <InstructorCardMin />
                 </SwiperSlide>
@@ -45,14 +51,13 @@ const InstructorsGrid = () => {
                 </SwiperSlide>
             </Swiper>
 
-            <Swiper
+            {/* <Swiper
                 slidesPerView={ 3 }
                 spaceBetween={ 6 }
                 pagination={ {
                     clickable: true,
-                    // Autoplay: true
                 } }
-                loop={true}
+                loop={ true }
                 modules={ [ Pagination ] }
                 className="flex lg:hidden pb-12 instructors-swiper"
             >
@@ -74,7 +79,7 @@ const InstructorsGrid = () => {
                 <SwiperSlide>
                     <InstructorCardMin />
                 </SwiperSlide>
-            </Swiper>
+            </Swiper> */}
         </>
     );
 };
