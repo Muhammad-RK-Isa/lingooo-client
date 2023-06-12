@@ -8,6 +8,7 @@ import Dashboard_Instructor from '../Pages/Dashboard/Dashboard_Instructor/Dashbo
 import Dashboard_Admin from '../Pages/Dashboard/Dashboard_Admin/Dashboard_Admin';
 import Login from "../Pages/Login/Login";
 import Registration from './../Pages/Registration/Registration';
+import RestrictedRoute from './RestrictedRoute';
 
 const routes = createBrowserRouter( [
     {
@@ -42,7 +43,7 @@ const routes = createBrowserRouter( [
         children: [
             {
                 path: 'student',
-                element: <Dashboard_Student/>
+                element: <RestrictedRoute><Dashboard_Student /></RestrictedRoute>
             },
             {
                 path: 'instructor',

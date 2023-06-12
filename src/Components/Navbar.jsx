@@ -8,6 +8,7 @@ import { HiOutlineMenuAlt1 } from 'react-icons/hi';
 import { MdLightMode, MdNightlight } from 'react-icons/md';
 import { Link, useLocation } from 'react-router-dom';
 import useAuth from './../Hooks/useAuth';
+import Swal from 'sweetalert2';
 
 const Navbar = () => {
     const { user, logOut } = useAuth();
@@ -15,21 +16,42 @@ const Navbar = () => {
     const navRef = useRef();
     const location = useLocation();
 
-    const [ isDark, setIsDark ] = useState( false );
+    const [ isDark, setIsDark ] = useState( localStorage?.getItem( 'theme' ) === 'dark' ? true : false || false );
     const [ openMenu, setOpenMenu ] = useState( false );
     const triggers = {
         onMouseEnter: () => setOpenMenu( true ),
         onMouseLeave: () => setOpenMenu( false ),
     };
+
+    const handleLogout = () => {
+        Swal.fire( {
+            title: 'Are you sure you want to logout?',
+            showCancelButton: true,
+            confirmButtonText: 'Logout',
+            customClass: {
+                confirmButton: '!bg-red-500 !text-white',
+                cancelButton: '!bg-white !text-black'
+            }
+        } ).then( ( result ) => {
+            if ( result.isConfirmed ) {
+                logOut();
+            };
+        } );
+    };
+
+
     useEffect( () => {
         if ( isDark ) {
             document.querySelector( 'body' ).classList.add( 'dark' );
+            localStorage.setItem( 'theme', 'dark' );
         } else {
             document.querySelector( 'body' ).classList.remove( 'dark' );
+            localStorage.setItem( 'theme', 'light' );
         }
     }, [ isDark ] );
 
     useEffect( () => {
+
         window.addEventListener( 'scroll', () => {
             const nav = navRef.current;
             if ( window.scrollY > 20 ) {
@@ -70,7 +92,7 @@ const Navbar = () => {
                 <div className="flex gap-8 items-center justify-self-end">
                     <div className="hidden lg:flex gap-8 items-center">
                         <Link
-                            to='/'
+                            to='/classes'
                             className="text-xl duration-200 hover:opacity-40"
                         >
                             Classes
@@ -100,15 +122,15 @@ const Navbar = () => {
                                     Login
                                 </Link>
                                 :
-                                <Menu open={ openMenu } handler={ setOpenMenu } className="outline-none">
-                                    <MenuHandler>
+                                <Menu open={ openMenu } handler={ setOpenMenu } className="outline-none border-none ring-0 focus:outline-none focus:ring-0 focus:border-none hover:outline-none hover:border-none hover:ring-0">
+                                    <MenuHandler className="outline-none border-none ring-0 focus:outline-none focus:ring-0 focus:border-none hover:outline-none hover:border-none hover:ring-0">
                                         <button
                                             { ...triggers }
                                             className="rounded-full p-2 box-content overscroll-hidden"
                                         >
                                             {
                                                 user?.photoURL ?
-                                                    <img src={ user.photoURL } alt="user" className="w-10 h-10 rounded-full" />
+                                                    <img src={ user.photoURL } alt="user" className="w-7 h-7 rounded-full" />
                                                     :
                                                     <CgProfile size={ 28 } className="box-content" />
                                             }
@@ -116,11 +138,12 @@ const Navbar = () => {
                                     </MenuHandler>
                                     <MenuList
                                         { ...triggers }
+                                        className='outline-none border-none ring-0 focus:outline-none focus:ring-0 focus:border-none hover:outline-none hover:border-none hover:ring-0'
                                     >
-                                        <div className="flex flex-col gap-3">
+                                        <div className="flex flex-col gap-3 border-none outline-none ring-0 focus:outline-none focus:ring-0 focus:border-none hover:outline-none hover:border-none hover:ring-0">
                                             <p>{ user?.displayName }</p>
                                             <p>{ user?.email }</p>
-                                            <Button color="red" size="sm">Logout</Button>
+                                            <Button color="red" size="sm" onClick={ handleLogout }>Logout</Button>
                                         </div>
                                     </MenuList>
                                 </Menu>

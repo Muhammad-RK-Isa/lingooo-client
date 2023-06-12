@@ -3,6 +3,7 @@ import { Outlet } from 'react-router-dom';
 import Sidepanel_Main from '../../Shared/Sideplanels/Sidepanel_Main';
 import Footer from './../../Shared/Footer/Footer';
 import Navbar from '../../Components/Navbar';
+import { Toaster } from 'react-hot-toast';
 
 export const MainContext = createContext();
 
@@ -15,6 +16,7 @@ const Main = () => {
     };
     return (
         <MainContext.Provider value={ props }>
+            <Toaster/>
             <Navbar />
             <Sidepanel_Main />
             <Outlet />

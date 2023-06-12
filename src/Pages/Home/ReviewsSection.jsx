@@ -1,6 +1,6 @@
 import React from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { Pagination } from "swiper";
+import { Autoplay, Pagination } from "swiper";
 import ReviewCard from '../../Components/ReviewCard';
 
 const ReviewsSection = () => {
@@ -18,7 +18,11 @@ const ReviewsSection = () => {
                         clickable: true,
                     } }
                     loop={ true }
-                    modules={ [ Pagination ] }
+                    autoplay={ {
+                        delay: 4500,
+                        disableOnInteraction: true,
+                    } }
+                    modules={ [ Pagination, Autoplay ] }
                     breakpoints={ {
                         1024: {
                             slidesPerView: 3,

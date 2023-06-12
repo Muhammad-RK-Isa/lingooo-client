@@ -1,10 +1,8 @@
-import React from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/pagination";
-import { Navigation, Pagination } from "swiper";
+import { Navigation, Pagination, Autoplay } from "swiper";
 import InstructorCardMin from '../../Components/InstructorCardMin';
-import { RiArrowDropLeftLine, RiArrowDropRightLine } from 'react-icons/ri';
 
 const InstructorsGrid = () => {
     return (
@@ -21,8 +19,12 @@ const InstructorsGrid = () => {
                 pagination={ {
                     clickable: true,
                 } }
+                autoplay={ {
+                    delay: 5000,
+                    disableOnInteraction: true,
+                } }
                 loop
-                modules={ [ Pagination, Navigation ] }
+                modules={ [ Pagination, Navigation, Autoplay ] }
                 breakpoints={ {
                     1024: {
                         slidesPerView: 3,
