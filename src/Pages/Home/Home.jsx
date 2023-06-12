@@ -6,8 +6,10 @@ import Communities from './Communities';
 import ReviewsSection from './ReviewsSection';
 import Header from '../../Shared/Header/Header';
 import Home_Navbar from './Home_Navbar';
+import scrollToTopOnRender from '../../Utils/scrollToTopOnRender';
 
 const Home = () => {
+    scrollToTopOnRender();
     return (
         <div>
             <Helmet>

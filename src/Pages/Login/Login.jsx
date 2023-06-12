@@ -13,9 +13,11 @@ import { Link, useLocation, useNavigate } from 'react-router-dom';
 import useAuth from '../../Hooks/useAuth';
 import { FcGoogle } from 'react-icons/fc';
 import { AiFillEye, AiFillEyeInvisible } from 'react-icons/ai';
+import scrollToTopOnRender from '../../Utils/scrollToTopOnRender';
 
 const Login = () => {
-    const { user, signIn, signInWithGoogle } = useAuth();
+    const { user, signIn, signInWithGoogle, setIsLoading } = useAuth();
+    scrollToTopOnRender();
     const { register, handleSubmit, formState: { errors }, setError } = useForm();
     const location = useLocation();
     const navigate = useNavigate();
@@ -26,12 +28,15 @@ const Login = () => {
     const [ hidden, setHidden ] = useState( true );
 
     const onSubmit = async ( { email, password } ) => {
+        setIsLoading( true );
         try {
             await signIn( email, password );
+            setIsLoading( false );
             toast.success( 'You are logged in!' );
             // navigate( previousLocation );
         }
         catch ( error ) {
+            setIsLoading( false );
             if ( error.code.includes( 'email' ) || error.code.includes( 'user' ) ) {
                 setError( 'email', {
                     type: error.code,
@@ -45,11 +50,14 @@ const Login = () => {
     };
 
     const handleGoogleLogin = async () => {
+        setIsLoading( true );
         try {
             await signInWithGoogle();
+            setIsLoading( false );
             toast.success( 'You are logged in!' );
             // navigate( previousLocation );
         } catch ( error ) {
+            setIsLoading( false );
             console.log( error );
         }
     };

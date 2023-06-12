@@ -4,6 +4,7 @@ import Sidepanel_Main from '../../Shared/Sideplanels/Sidepanel_Main';
 import Footer from './../../Shared/Footer/Footer';
 import Navbar from '../../Components/Navbar';
 import { Toaster } from 'react-hot-toast';
+import Loader from '../../Components/Loader';
 
 export const MainContext = createContext();
 
@@ -16,7 +17,8 @@ const Main = () => {
     };
     return (
         <MainContext.Provider value={ props }>
-            <Toaster/>
+            <Loader/>
+            <Toaster />
             <Navbar />
             <Sidepanel_Main />
             <Outlet />

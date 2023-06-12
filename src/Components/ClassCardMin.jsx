@@ -7,7 +7,6 @@ import {
 import { BanknotesIcon } from "@heroicons/react/24/solid";
 
 import { motion } from 'framer-motion';
-import { useInView } from 'react-intersection-observer';
 
 const ClassCardMin = ( { data } ) => {
     const variants = {
@@ -25,21 +24,16 @@ const ClassCardMin = ( { data } ) => {
             },
         },
     };
-
-    const [ ref, inView ] = useInView( {
-        triggerOnce: true,
-        threshold: 0.2,
-    } );
     // const { _id, title, image, price, language } = data;
 
     return (
-        <motion.div ref={ ref } initial="hidden" animate={ inView ? 'visible' : 'hidden' } variants={ variants }
+        <motion.div initial="hidden" animate="visible" variants={ variants }
         >
             <Card className="w-full max-w-[26rem] shadow-lg rounded-lg overflow-hidden dark:bg-opacity-90 dark:text-black">
                 <CardHeader floated={ false } color="blue-gray" className="m-2 rounded-lg z-10">
                     <img
                         src="https://images.unsplash.com/photo-1499696010180-025ef6e1a8f9?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80"
-                        alt="ui/ux review check"
+                        alt="class-thumbnail"
                     />
                     <div className="to-bg-black-10 absolute inset-0 h-full w-full bg-gradient-to-tr from-transparent via-transparent to-black/60 " />
                 </CardHeader>

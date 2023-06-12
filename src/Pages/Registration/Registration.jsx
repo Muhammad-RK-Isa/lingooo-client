@@ -17,10 +17,11 @@ import { FcGoogle, FcAddImage } from 'react-icons/fc';
 import { AiFillEye, AiFillEyeInvisible } from 'react-icons/ai';
 import Cropper from 'react-easy-crop';
 import getCroppedImg from '../../Utils/getCroppedImg';
+import axios from 'axios';
 
 
 const Registration = () => {
-    const { user, signUp, updateUserProfile, signInWithGoogle } = useAuth();
+    const { user, signUp, updateUserProfile, signInWithGoogle, setIsLoading } = useAuth();
     const { register, handleSubmit, formState: { errors }, setError, watch } = useForm();
     const location = useLocation();
     const navigate = useNavigate();
@@ -71,29 +72,29 @@ const Registration = () => {
         console.log( formDataImage );
 
         try {
-            const response = await fetch( 'https://api.imgbb.com/1/upload', {
-                method: 'POST',
-                body: formDataImage
-            } );
+            // const response = await fetch( 'https://api.imgbb.com/1/upload', {
+            //     method: 'POST',
+            //     body: formDataImage
+            // } );
+            setIsLoading( true );
+            const response = await axios.post( 'https://api.imgbb.com/1/upload', formDataImage );
             const data = await response.json();
             const photoURL = await data?.data?.url;
             console.log( photoURL );
             try {
                 await signUp( email, password );
-                await updateUserProfile( name, photoURL )
-                    .catch( error => {
-                        console.log( error );
-                    } );
+                await updateUserProfile( name, photoURL );
+                setIsLoading( false );
                 toast.success( 'Account created succcesfully!' );
             } catch ( error ) {
-                console.log( error?.code );
+                setIsLoading( false );
                 setError( 'email', {
                     type: 'existingUser',
                     message: 'User already exists'
                 } );
             }
         } catch ( error ) {
-            console.log( error );
+            setIsLoading( false );
             toast.error( 'Something went wrong!' );
         };
     };
@@ -157,7 +158,7 @@ const Registration = () => {
                                 { ...register( 'password', {
                                     required: true,
                                     minLength: 6,
-                                    pattern: /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}$/
+                                    pattern: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*\W).{6,}$/
                                 } ) }
                             />
                             {
@@ -169,7 +170,7 @@ const Registration = () => {
                         </div>
                         <Typography variant="small" color="red" className={ `${ errors.password ? 'inline-flex' : 'hidden' } gap-1 font-normal -mt-2 text-xs` }>
                             <InformationCircleIcon className="w-4 h-4 -mt-px text-red-500" />
-                            { errors?.password?.type === 'required' ? 'Password cannot be empty' : 'Password must be at least 6 characters long and contain at least one number, one uppercase letter and one lowercase letter' }
+                            { errors?.password?.type === 'required' ? 'Password cannot be empty' : 'Password must be at least 6 characters long and contain at least one number, one uppercase letter, one lowercase letter and a special character.' }
                         </Typography>
 
                         {/* Password Confirmation */ }
