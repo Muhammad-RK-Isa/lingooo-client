@@ -1,9 +1,267 @@
-import React from 'react';
+import { toast } from 'react-hot-toast';
+import { InformationCircleIcon } from '@heroicons/react/24/solid';
+import {
+    Avatar,
+    Button,
+    Card,
+    Input,
+    Slider,
+    Typography,
+} from "@material-tailwind/react";
+import { useCallback, useEffect, useState } from "react";
+import { Helmet } from "react-helmet-async";
+import { useForm } from "react-hook-form";
+import { Link, useLocation, useNavigate } from 'react-router-dom';
+import useAuth from '../../Hooks/useAuth';
+import { FcGoogle, FcAddImage } from 'react-icons/fc';
+import { AiFillEye, AiFillEyeInvisible } from 'react-icons/ai';
+import Cropper from 'react-easy-crop';
+import getCroppedImg from '../../Utils/getCroppedImg';
+
 
 const Registration = () => {
+    const { user, signUp, updateUserProfile, signInWithGoogle } = useAuth();
+    const { register, handleSubmit, formState: { errors }, setError, watch } = useForm();
+    const location = useLocation();
+    const navigate = useNavigate();
+    const previousLocation = location?.state?.from || '/';
+
+    const [ hidden, setHidden ] = useState( true );
+    const [ confirmHidden, setConfirmHidden ] = useState( true );
+    const [ selectedImage, setSelectedImage ] = useState( null );
+    const [ croppedImage, setCroppedImage ] = useState( null );
+
+    const handleImageChange = ( event ) => {
+        const file = event.target.files[ 0 ];
+        if ( file ) {
+            setSelectedImage( URL.createObjectURL( file ) );
+        } else {
+            setSelectedImage( null );
+        }
+    };
+
+    // ! --------------------------------------------- //
+
+    // ? Cropper
+    const [ crop, setCrop ] = useState( { x: 0, y: 0 } );
+    const [ zoom, setZoom ] = useState( 1 );
+    const aspect = 1;
+
+    const onCropChange = ( crop ) => {
+        setCrop( crop );
+    };
+
+    const onCropComplete = async ( _, croppedAreaPixels ) => {
+        try {
+            const croppedImage = await getCroppedImg( selectedImage, croppedAreaPixels );
+            setCroppedImage( croppedImage );
+            console.log( croppedImage );
+        } catch ( error ) {
+            console.error( 'Error cropping image:', error );
+        }
+    };
+
+    // ! ------------------------------------------ //
+
+    const onSubmit = async ( { name, email, password, profilePicture } ) => {
+
+        const formDataImage = new FormData();
+        formDataImage.append( 'image', croppedImage );
+        formDataImage.append( 'key', import.meta.env.VITE_IMAGEBB_API_KEY );
+        console.log( formDataImage );
+
+        try {
+            const response = await fetch( 'https://api.imgbb.com/1/upload', {
+                method: 'POST',
+                body: formDataImage
+            } );
+            const data = await response.json();
+            const photoURL = await data?.data?.url;
+            console.log( photoURL );
+            try {
+                await signUp( email, password );
+                await updateUserProfile( name, photoURL )
+                    .catch( error => {
+                        console.log( error );
+                    } );
+                toast.success( 'Account created succcesfully!' );
+            } catch ( error ) {
+                console.log( error?.code );
+                setError( 'email', {
+                    type: 'existingUser',
+                    message: 'User already exists'
+                } );
+            }
+        } catch ( error ) {
+            console.log( error );
+            toast.error( 'Something went wrong!' );
+        };
+    };
+
+    const handleGoogleLogin = async () => {
+        try {
+            await signInWithGoogle();
+            toast.success( 'You are logged in!' );
+        } catch ( error ) {
+            console.log( error );
+        }
+    };
+
+    useEffect( () => {
+        if ( user ) {
+            navigate( previousLocation );
+        }
+    }, [ user ] );
+
+
     return (
-        <div>
-            
+        <div className='grid place-content-center w-full h-full mt-8'>
+            <Helmet>
+                <title>Lingooo | Registration</title>
+            </Helmet>
+            <Card color="transparent" shadow={ false } className='lg:max-w-lg w-full'>
+                <Typography variant="h4" className="text-black dark:text-white">
+                    Create an account.
+                </Typography>
+                <form onSubmit={ handleSubmit( onSubmit ) } className="mt-8 mb-2 w-80">
+                    <div className="mb-4 flex flex-col gap-6">
+                        <Input
+                            size="lg"
+                            label="Full Name"
+                            error={ !!errors.name }
+                            { ...register( 'name', { required: true, minLength: 2, maxLength: 24 } ) }
+                            className='dark:border-2 dark:text-white'
+                        />
+                        <Typography variant="small" color="red" className={ `${ errors.name ? 'inline-flex' : 'hidden' } gap-1 font-normal -mt-2 text-xs` }>
+                            <InformationCircleIcon className="w-4 h-4 -mt-px text-red-500" />
+                            { errors.name?.type === 'required' ? 'Enter your name' : 'Name cannot be less than 2 characters long and exceed 24 characters.' }
+                        </Typography>
+                        <Input
+                            size="lg"
+                            label="Email"
+                            error={ !!errors.email }
+                            { ...register( 'email', { required: true, pattern: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i } ) }
+                            className='dark:border-2 dark:text-white'
+                        />
+                        <Typography variant="small" color="red" className={ `${ errors.email ? 'inline-flex' : 'hidden' } gap-1 font-normal -mt-2 text-xs` }>
+                            <InformationCircleIcon className="w-4 h-4 -mt-px text-red-500" />
+                            { errors.email?.type === 'required' ? 'Email cannot be empty' : errors.email?.type === 'pattern' ? 'Invalid email' : 'User already exists' }
+                        </Typography>
+                        <div className='relative'>
+                            <Input
+                                type={ hidden ? 'password' : 'text' }
+                                size="lg"
+                                label="Password"
+                                error={ !!errors.password }
+                                className='dark:border-2 dark:text-white'
+                                { ...register( 'password', {
+                                    required: true,
+                                    minLength: 6,
+                                    pattern: /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}$/
+                                } ) }
+                            />
+                            {
+                                hidden ?
+                                    <AiFillEye size={ 20 } className="absolute top-1/2 right-2 -translate-y-1/2 box-content lg:cursor-pointer dark:text-white" onClick={ () => setHidden( false ) } />
+                                    :
+                                    <AiFillEyeInvisible size={ 20 } className="absolute top-1/2 right-2 -translate-y-1/2 box-content lg:cursor-pointer dark:text-white" onClick={ () => setHidden( true ) } />
+                            }
+                        </div>
+                        <Typography variant="small" color="red" className={ `${ errors.password ? 'inline-flex' : 'hidden' } gap-1 font-normal -mt-2 text-xs` }>
+                            <InformationCircleIcon className="w-4 h-4 -mt-px text-red-500" />
+                            { errors?.password?.type === 'required' ? 'Password cannot be empty' : 'Password must be at least 6 characters long and contain at least one number, one uppercase letter and one lowercase letter' }
+                        </Typography>
+
+                        {/* Password Confirmation */ }
+                        <div className='relative'>
+                            <Input
+                                type={ confirmHidden ? 'password' : 'text' }
+                                size="lg"
+                                label="Confirm Password"
+                                error={ !!errors.confirmPassword }
+                                className='dark:border-2 dark:text-white'
+                                { ...register( 'confirmPassword', {
+                                    required: true,
+                                    validate: ( value ) => value === watch( 'password' ) || "Passwords do not match"
+                                } ) }
+                            />
+                            {
+                                confirmHidden ?
+                                    <AiFillEye size={ 20 } className="absolute top-1/2 right-2 -translate-y-1/2 box-content lg:cursor-pointer dark:text-white" onClick={ () => setConfirmHidden( false ) } />
+                                    :
+                                    <AiFillEyeInvisible size={ 20 } className="absolute top-1/2 right-2 -translate-y-1/2 box-content lg:cursor-pointer dark:text-white" onClick={ () => setConfirmHidden( true ) } />
+                            }
+                        </div>
+                        <Typography variant="small" color="red" className={ `${ errors.confirmPassword ? 'inline-flex' : 'hidden' } gap-1 font-normal -mt-2 text-xs` }>
+                            <InformationCircleIcon className="w-4 h-4 -mt-px text-red-500" />
+                            { errors.confirmPassword?.type === 'required' ? 'Re-enter your password' : errors.confirmPassword?.type === 'validate' && 'Passwords do not match' }
+                        </Typography>
+
+                        <div className='border dark:border-2 rounded-lg w-full relative'>
+                            <label htmlFor="profilePicture" className="flex items-center gap-3 text-sm p-2">
+                                <FcAddImage size={ 32 } className='box-content' />
+                                <span className='text-blue-gray-400'>Choose a profile picture (optional)</span>
+                                <input
+                                    { ...register( 'profilePicture', { required: false } ) }
+                                    type="file"
+                                    id='profilePicture'
+                                    onChange={ handleImageChange }
+                                    className='invisible absolute top-0 left-0 w-full h-full'
+                                />
+                            </label>
+                            {
+                                selectedImage &&
+                                <div className='p-6 grid place-content-center border dark:border-2 rounded-lg w-full h-40 relative'>
+                                    <Cropper
+                                        image={ selectedImage }
+                                        crop={ crop }
+                                        zoom={ zoom }
+                                        aspect={ aspect }
+                                        cropShape="round"
+                                        showGrid={ false }
+                                        onCropChange={ onCropChange }
+                                        onCropComplete={ onCropComplete }
+                                        onZoomChange={ zoom }
+                                        className='w-full h-10 max-h-10 absolute top-0 left-0'
+                                    />
+                                </div>
+                            }
+                        </div>
+                        {
+                            selectedImage &&
+                            <input
+                                type='range'
+                                value={ zoom }
+                                min={ 1 }
+                                max={ 3.3 }
+                                step={ 0.05 }
+                                onChange={ ( e ) => setZoom( e.target.value ) }
+                            />
+                        }
+
+                    </div>
+                    <Button className="bg-secondary mt-6" fullWidth type="submit">
+                        Register
+                    </Button>
+                    <Typography color="gray" className="mt-4 text-center font-normal">
+                        Already have an account?{ " " }
+                        <Link
+                            to='/login'
+                            className="font-medium text-primary transition-colors hover:text-blue-700 duration-200"
+                        >
+                            Login
+                        </Link>
+                    </Typography>
+                </form>
+                <div className='relative my-4'>
+                    <span className='absolute top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2 bg-white dark:bg-black px-1'>OR</span>
+                    <hr className='border-none h-px w-full bg-gray-300 dark:bg-opacity-30' />
+                </div>
+                <Button color='white' className="inline-flex items-center justify-center gap-2 text-base font-normal mt-6 capitalize border" fullWidth onClick={ handleGoogleLogin }>
+                    <FcGoogle size={ 24 } className='box-content' />
+                    Continue with Google
+                </Button>
+            </Card>
         </div>
     );
 };

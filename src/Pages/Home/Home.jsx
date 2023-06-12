@@ -13,8 +13,8 @@ const Home = () => {
             <Helmet>
                 <title>Lingooo | Home</title>
             </Helmet>
-            <Home_Navbar/>
-            <Header/>
+            <Home_Navbar />
+            <Header />
             <div className='max-w-screen-2xl mx-2 lg:mx-auto'>
                 <ClassesGrid />
                 <InstructorsGrid />

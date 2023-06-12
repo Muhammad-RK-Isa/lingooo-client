@@ -9,7 +9,7 @@ import {
 import { useEffect, useState } from "react";
 import { Helmet } from "react-helmet-async";
 import { useForm } from "react-hook-form";
-import { useLocation, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import useAuth from '../../Hooks/useAuth';
 import { FcGoogle } from 'react-icons/fc';
 import { AiFillEye, AiFillEyeInvisible } from 'react-icons/ai';
@@ -20,7 +20,6 @@ const Login = () => {
     const location = useLocation();
     const navigate = useNavigate();
     const previousLocation = location?.state?.from || '/';
-    console.log( previousLocation );
 
     const [ emailError, setEmailError ] = useState( null );
     const [ passError, setPassError ] = useState( null );
@@ -138,12 +137,12 @@ const Login = () => {
                     </Button>
                     <Typography color="gray" className="mt-4 text-center font-normal">
                         Don't have an account?{ " " }
-                        <a
-                            href="#"
+                        <Link
+                            to="/registration"
                             className="font-medium text-primary transition-colors hover:text-blue-700 duration-200"
                         >
                             Register
-                        </a>
+                        </Link>
                     </Typography>
                 </form>
                 <div className='relative my-4'>
