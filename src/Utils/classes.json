@@ -8,6 +8,7 @@
             "uid": "zULFUIkFOZWXI5895oOSNP72WYN2",
             "name": "Muhammad Isa"
         },
+        "enrolled": 2000,
         "status": "APPROVED"
     },
     {
@@ -19,6 +20,7 @@
             "uid": "zULFUIkFOZWXI5895oOSNP72WYN2",
             "name": "Muhammad Isa"
         },
+        "enrolled": 1800,
         "status": "APPROVED"
     },
     {
@@ -30,6 +32,7 @@
             "uid": "zULFUIkFOZWXI5895oOSNP72WYN2",
             "name": "Muhammad Isa"
         },
+        "enrolled": 550,
         "status": "APPROVED"
     },
     {
@@ -41,6 +44,7 @@
             "uid": "zULFUIkFOZWXI5895oOSNP72WYN2",
             "name": "Muhammad Isa"
         },
+        "enrolled": 2560,
         "status": "APPROVED"
     },
     {
@@ -52,6 +56,7 @@
             "uid": "zULFUIkFOZWXI5895oOSNP72WYN2",
             "name": "Muhammad Isa"
         },
+        "enrolled": 3400,
         "status": "APPROVED"
     },
     {
@@ -63,6 +68,7 @@
             "uid": "zULFUIkFOZWXI5895oOSNP72WYN2",
             "name": "Muhammad Isa"
         },
+        "enrolled": 5400,
         "status": "APPROVED"
     }
 ]

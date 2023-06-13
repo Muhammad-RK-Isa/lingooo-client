@@ -22,7 +22,7 @@ import { RxCross2 } from 'react-icons/rx';
 
 
 const Registration = () => {
-    const { user, signUp, updateUserProfile, signInWithGoogle, setIsLoading } = useAuth();
+    const { user, signUp, updateUserProfile, signInWithGoogle, setLoading } = useAuth();
     const { register, handleSubmit, formState: { errors }, setError, watch } = useForm();
     const location = useLocation();
     const navigate = useNavigate();
@@ -83,7 +83,7 @@ const Registration = () => {
         formData.append( 'image', croppedImage );
         formData.append( 'key', import.meta.env.VITE_IMAGEBB_API_KEY );
         try {
-            setIsLoading( true );
+            setLoading( true );
             const data = await axios.post( 'https://api.imgbb.com/1/upload', formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data'
@@ -94,10 +94,10 @@ const Registration = () => {
             try {
                 await signUp( email, password );
                 await updateUserProfile( name, photoURL );
-                setIsLoading( false );
+                setLoading( false );
                 toast.success( 'Account created succcesfully!' );
             } catch ( error ) {
-                setIsLoading( false );
+                setLoading( false );
                 setError( 'email', {
                     type: 'existingUser',
                     message: 'User already exists'
@@ -105,7 +105,7 @@ const Registration = () => {
             }
         } catch ( error ) {
             console.log( error );
-            setIsLoading( false );
+            setLoading( false );
             toast.error( 'Something went wrong!' );
         };
     };

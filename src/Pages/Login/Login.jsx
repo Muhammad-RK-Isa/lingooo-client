@@ -16,7 +16,7 @@ import { AiFillEye, AiFillEyeInvisible } from 'react-icons/ai';
 import scrollToTopOnRender from '../../Utils/scrollToTopOnRender';
 
 const Login = () => {
-    const { user, signIn, signInWithGoogle, setIsLoading } = useAuth();
+    const { user, signIn, signInWithGoogle, setLoading } = useAuth();
     scrollToTopOnRender();
     const { register, handleSubmit, formState: { errors }, setError } = useForm();
     const location = useLocation();
@@ -28,15 +28,15 @@ const Login = () => {
     const [ hidden, setHidden ] = useState( true );
 
     const onSubmit = async ( { email, password } ) => {
-        setIsLoading( true );
+        setLoading( true );
         try {
             await signIn( email, password );
-            setIsLoading( false );
+            setLoading( false );
             toast.success( 'You are logged in!' );
             // navigate( previousLocation );
         }
         catch ( error ) {
-            setIsLoading( false );
+            setLoading( false );
             if ( error.code.includes( 'email' ) || error.code.includes( 'user' ) ) {
                 setError( 'email', {
                     type: error.code,
@@ -50,14 +50,14 @@ const Login = () => {
     };
 
     const handleGoogleLogin = async () => {
-        setIsLoading( true );
+        setLoading( true );
         try {
             await signInWithGoogle();
-            setIsLoading( false );
+            setLoading( false );
             toast.success( 'You are logged in!' );
             // navigate( previousLocation );
         } catch ( error ) {
-            setIsLoading( false );
+            setLoading( false );
             console.log( error );
         }
     };

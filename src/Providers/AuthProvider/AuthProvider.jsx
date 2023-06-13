@@ -18,26 +18,26 @@ const AuthProvider = ( { children } ) => {
 
     const auth = getAuth( app );
     const [ user, setUser ] = useState( null );
-    const [ isLoading, setIsLoading ] = useState( false );
+    const [ loading, setLoading ] = useState( false );
 
     // ! Auth Contexts and stuffs
     const signIn = ( email, password ) => {
-        setIsLoading( true );
+        setLoading( true );
         return signInWithEmailAndPassword( auth, email, password );
     };
 
     const signInWithGoogle = () => {
-        setIsLoading( true );
+        setLoading( true );
         return signInWithPopup( auth, new GoogleAuthProvider() );
     };
 
     const signUp = ( email, password ) => {
-        setIsLoading( true );
+        setLoading( true );
         return createUserWithEmailAndPassword( auth, email, password );
     };
 
     const updateUserProfile = ( displayName, photoURL ) => {
-        setIsLoading( true );
+        setLoading( true );
         return updateProfile( auth.currentUser, {
             displayName,
             photoURL
@@ -45,7 +45,7 @@ const AuthProvider = ( { children } ) => {
     };
 
     const logOut = () => {
-        setIsLoading( true );
+        setLoading( true );
         return signOut( auth );
     };
 
@@ -74,8 +74,8 @@ const AuthProvider = ( { children } ) => {
         updateUserProfile,
         logOut,
         signInWithGoogle,
-        isLoading,
-        setIsLoading
+        loading,
+        setLoading
     };
 
     useEffect( () => {
@@ -86,7 +86,7 @@ const AuthProvider = ( { children } ) => {
             } else {
                 sessionStorage.removeItem( 'access-token' );
             }
-            setIsLoading( false );
+            setLoading( false );
         } );
 
         return () => {
