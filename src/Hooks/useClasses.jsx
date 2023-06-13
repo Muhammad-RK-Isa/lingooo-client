@@ -1,7 +1,5 @@
 import axios from 'axios';
-import { useEffect } from 'react';
 import { useQuery } from '@tanstack/react-query';
-import useAuth from './useAuth';
 
 const fetchClasses = async ( quantity ) => {
     const url = quantity ? `http://192.168.0.179:5000/classes?quantity=${ quantity }` : 'http://192.168.0.179:5000/classes';

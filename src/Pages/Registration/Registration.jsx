@@ -115,7 +115,12 @@ const Registration = () => {
             await signInWithGoogle();
             toast.success( 'You are logged in!' );
         } catch ( error ) {
-            console.log( error );
+            if ( error.code === 'auth/popup-closed-by-user' ) {
+                setLoading( false );
+                toast.error( 'Login failed. Please try again.' );
+            } else {
+                console.log( error );
+            }
         }
     };
 

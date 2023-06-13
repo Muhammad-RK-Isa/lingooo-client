@@ -69,10 +69,15 @@ const AuthProvider = ( { children } ) => {
     };
 
     // ? Add user to database
-    const addUserToDatabase = async ( uid ) => {
+    const addUserToDatabase = async ( uid, displayName, photoURL, email ) => {
         try {
-            const data = await axios.post( `${ import.meta.env.VITE_BACKEND_URL }/auth/add_user/${ uid }` );
-            console.log( data );
+            const data = await axios.post( `${ import.meta.env.VITE_BACKEND_URL }/auth/add_user`, {
+                uid,
+                displayName,
+                photoURL,
+                email
+            } );
+            // console.log( data );
         }
         catch ( error ) {
             console.log( error );
@@ -91,12 +96,12 @@ const AuthProvider = ( { children } ) => {
         setLoading
     };
 
-    useEffect( () => {
+    useEffect( () => {        
         const unsubscribe = onAuthStateChanged( auth, currentUser => {
             setUser( currentUser );
             if ( currentUser ) {
                 requestAccessToken( currentUser.uid );
-                addUserToDatabase( currentUser.uid );
+                addUserToDatabase( currentUser.uid, currentUser.displayName, currentUser.photoURL, currentUser.email );
             } else {
                 sessionStorage.removeItem( 'access-token' );
             }

@@ -3,8 +3,12 @@ import "swiper/css";
 import "swiper/css/pagination";
 import { Navigation, Pagination, Autoplay } from "swiper";
 import InstructorCardMin from '../../Components/InstructorCardMin';
+import useInstructors from "../../Hooks/useInstructors";
 
 const InstructorsGrid = () => {
+
+    const { instructors, refetch } = useInstructors();
+
     return (
         <>
             <div className="mb-10 lg:mb-14 text-center max-w-xs lg:max-w-2xl mx-auto">
@@ -21,36 +25,27 @@ const InstructorsGrid = () => {
                 } }
                 autoplay={ {
                     delay: 5000,
-                    disableOnInteraction: true,
+                    disableOnInteraction: false,
                 } }
                 loop
                 modules={ [ Pagination, Navigation, Autoplay ] }
                 breakpoints={ {
                     1024: {
-                        slidesPerView: 3,
+                        slidesPerView: 4,
                         spaceBetween: 30,
                     }
                 } }
                 className="pb-12 instructors-swiper lg:max-w-6xl relative"
             >
-                <SwiperSlide>
-                    <InstructorCardMin />
-                </SwiperSlide>
-                <SwiperSlide>
-                    <InstructorCardMin />
-                </SwiperSlide>
-                <SwiperSlide>
-                    <InstructorCardMin />
-                </SwiperSlide>
-                <SwiperSlide>
-                    <InstructorCardMin />
-                </SwiperSlide>
-                <SwiperSlide>
-                    <InstructorCardMin />
-                </SwiperSlide>
-                <SwiperSlide>
-                    <InstructorCardMin />
-                </SwiperSlide>
+                {
+                    instructors?.map( ( instuctorData ) => {
+                        return (
+                            <SwiperSlide key={ instuctorData._id }>
+                                <InstructorCardMin instructorData={ instuctorData } />
+                            </SwiperSlide>
+                        );
+                    } )
+                }
             </Swiper>
         </>
     );

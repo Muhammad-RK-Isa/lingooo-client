@@ -57,8 +57,12 @@ const Login = () => {
             toast.success( 'You are logged in!' );
             // navigate( previousLocation );
         } catch ( error ) {
-            setLoading( false );
-            console.log( error );
+            if ( error.code === 'auth/popup-closed-by-user' ) {
+                setLoading( false );
+                toast.error( 'Login failed. Please try again.' );
+            } else {
+                console.log( error );
+            }
         }
     };
 

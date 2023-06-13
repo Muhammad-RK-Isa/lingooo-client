@@ -10,7 +10,6 @@ const ClassesGrid = () => {
             {
                 classes.length > 0 &&
                 classes.map( ( classData, idx ) => {
-                    console.log( classData );
                     return (
                         <div
                             key={ classData._id }
