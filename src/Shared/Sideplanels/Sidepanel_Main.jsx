@@ -13,15 +13,16 @@ import { XMarkIcon } from "@heroicons/react/24/outline";
 import {
     PresentationChartBarIcon,
     ShoppingBagIcon,
-    UserCircleIcon,
-    Cog6ToothIcon,
+    UserGroupIcon,
     InboxIcon,
-    PowerIcon,
+    BookOpenIcon,
+    HomeIcon
 } from "@heroicons/react/24/solid";
 import { useContext } from "react";
 import { MainContext } from "../../Layouts/Main/Main";
 import { Transition } from "@headlessui/react";
 import logo from '../../assets/svg/logo-gradient.svg';
+import { Link } from 'react-router-dom';
 
 const Sidepanel_Main = () => {
     const { isOpen, setIsOpen } = useContext( MainContext );
@@ -39,39 +40,61 @@ const Sidepanel_Main = () => {
         >
             <Drawer open={ isOpen } onClose={ closeDrawer } className="dark:bg-white dark:bg-opacity-20 dark:backdrop-blur-lg">
                 <div className="mb-2 flex items-center justify-between p-4">
-                    <img src={logo} alt="" className="h-8" />
+                    <img src={ logo } alt="" className="h-8" />
                     <IconButton variant="text" color="blue-gray" onClick={ closeDrawer } >
                         <XMarkIcon strokeWidth={ 2 } className="h-5 w-5 dark:text-white" />
                     </IconButton>
                 </div>
                 <List className="dark:bg-transparent dark:text-black">
-                    <ListItem className="dark:text-white">
-                        <ListItemPrefix>
-                            <PresentationChartBarIcon className="h-5 w-5" />
-                        </ListItemPrefix>
-                        Dashboard
-                    </ListItem>
-                    <ListItem className="dark:text-white">
-                        <ListItemPrefix>
-                            <ShoppingBagIcon className="h-5 w-5" />
-                        </ListItemPrefix>
-                        E-Commerce
-                    </ListItem>
-                    <ListItem className="dark:text-white">
-                        <ListItemPrefix>
-                            <InboxIcon className="h-5 w-5" />
-                        </ListItemPrefix>
-                        Inbox
-                        <ListItemSuffix>
-                            <Chip
-                                value="14"
-                                size="sm"
-                                variant="ghost"
-                                color="blue-gray"
-                                className="rounded-full"
-                            />
-                        </ListItemSuffix>
-                    </ListItem>
+                    <Link to="/" onClick={ closeDrawer }>
+                        <ListItem className="dark:text-white">
+                            <ListItemPrefix>
+                                <HomeIcon className="h-5 w-5" />
+                            </ListItemPrefix>
+                            Home
+                        </ListItem>
+                    </Link>
+                    <Link to="/instructors" onClick={ closeDrawer }>
+                        <ListItem className="dark:text-white">
+                            <ListItemPrefix>
+                                <UserGroupIcon className="h-5 w-5" />
+                            </ListItemPrefix>
+                            Instructors
+                        </ListItem>
+                    </Link>
+                    <Link to="/classes" onClick={ closeDrawer }>
+                        <ListItem className="dark:text-white">
+                            <ListItemPrefix>
+                                <BookOpenIcon className="h-5 w-5" />
+                            </ListItemPrefix>
+                            Classes
+                        </ListItem>
+                    </Link>
+                    <Link to="/dashboard" onClick={ closeDrawer }>
+                        <ListItem className="dark:text-white">
+                            <ListItemPrefix>
+                                <PresentationChartBarIcon className="h-5 w-5" />
+                            </ListItemPrefix>
+                            Dashboard
+                        </ListItem>
+                    </Link>
+                    <Link to="/dashboard" onClick={ closeDrawer }>
+                        <ListItem className="dark:text-white">
+                            <ListItemPrefix>
+                                <ShoppingBagIcon className="h-5 w-5" />
+                            </ListItemPrefix>
+                            Cart
+                            <ListItemSuffix>
+                                <Chip
+                                    value="14"
+                                    size="sm"
+                                    variant="ghost"
+                                    color="blue-gray"
+                                    className="rounded-full dark:text-white"
+                                />
+                            </ListItemSuffix>
+                        </ListItem>
+                    </Link>
                 </List>
             </Drawer>
         </Transition>

@@ -8,29 +8,28 @@ import { Autoplay } from 'swiper';
 const Banner = () => {
     return (
         <div className="h-max md:h-72 lg:h-96 grid place-content-center relative">
-            <image
+            <img
                 src={ bicon1 }
                 alt="banner-icon"
-                className="opacity-30 lg:opacity-100 rounded-full h-20 w-20 lg:h-24 lg:w-24 absolute left-10 -top-14 md:left-80 md:top-10"
+                className="opacity-10 rounded-full h-20 w-20 lg:h-24 lg:w-24 absolute left-10 -top-14 md:left-80 md:top-10"
 
             />
-            <image
+            <img
                 src={ bicon2 }
                 alt="banner-icon"
-                className="opacity-30 lg:opacity-100 rounded-full h-20 w-20 lg:h-24 lg:w-24 absolute left-6 -bottom-5 md:left-72 md:bottom-5"
+                className="opacity-20 rounded-full h-20 w-20 lg:h-24 lg:w-24 absolute left-6 -bottom-5 md:left-72 md:bottom-5"
 
             />
-            <image
+            <img
                 src={ bicon3 }
                 alt="banner-icon"
-                className="opacity-30 lg:opacity-100 rounded-full h-20 w-20 lg:h-24 lg:w-24 absolute right-10 -top-8 md:right-80 md:top-12"
+                className="opacity-10 rounded-full h-20 w-20 lg:h-24 lg:w-24 absolute right-10 -top-8 md:right-80 md:top-12"
 
             />
-            <image
+            <img
                 src={ bicon4 }
                 alt="banner-icon"
-                className="opacity-30 lg:opacity-100 rounded-full h-20 w-20 lg:h-24 lg:w-24 absolute right-10 -bottom-8 md:right-72 md:bottom-5"
-
+                className="opacity-20 rounded-full h-20 w-20 lg:h-24 lg:w-24 absolute right-10 -bottom-8 md:right-72 md:bottom-5"
             />
 
             <Swiper

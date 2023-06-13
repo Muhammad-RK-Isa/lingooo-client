@@ -9,6 +9,7 @@ import Dashboard_Admin from '../Pages/Dashboard/Dashboard_Admin/Dashboard_Admin'
 import Login from "../Pages/Login/Login";
 import Registration from './../Pages/Registration/Registration';
 import RestrictedRoute from './RestrictedRoute';
+import Classes from "../Pages/Classes/Classes";
 
 const routes = createBrowserRouter( [
     {
@@ -34,6 +35,10 @@ const routes = createBrowserRouter( [
             {
                 path: '/registration',
                 element: <Registration />
+            },
+            {
+                path: '/classes',
+                element: <Classes/>
             }
         ]
     },
