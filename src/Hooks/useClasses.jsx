@@ -10,14 +10,7 @@ const fetchClasses = async ( quantity ) => {
 };
 
 const useClasses = ( quantity ) => {
-    const { setLoading } = useAuth();
     const { refetch, data: classes = [], isLoading, isError } = useQuery( [ 'classes', quantity ], () => fetchClasses( quantity ) );
-    useEffect( () => {
-        if ( isLoading ) {
-            setLoading( true );
-        }
-    }, [] );
-
     return {
         refetch,
         classes,
