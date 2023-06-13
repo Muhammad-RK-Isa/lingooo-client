@@ -1,5 +1,6 @@
 import { app } from './../../Firebase/firebase.config';
 import { createContext, useEffect, useState } from "react";
+import axios from 'axios';
 import {
     GoogleAuthProvider,
     createUserWithEmailAndPassword,
@@ -49,6 +50,7 @@ const AuthProvider = ( { children } ) => {
         return signOut( auth );
     };
 
+    // ? Request Access Token
     const requestAccessToken = async ( uid ) => {
         try {
             const response = await fetch( `${ import.meta.env.VITE_BACKEND_URL }/auth/request_access_token`, {
@@ -60,6 +62,17 @@ const AuthProvider = ( { children } ) => {
             } );
             const data = await response.json();
             sessionStorage.setItem( 'access-token', data.token );
+        }
+        catch ( error ) {
+            console.log( error );
+        }
+    };
+
+    // ? Add user to database
+    const addUserToDatabase = async ( uid ) => {
+        try {
+            const data = await axios.post( `${ import.meta.env.VITE_BACKEND_URL }/auth/add_user/${ uid }` );
+            console.log( data );
         }
         catch ( error ) {
             console.log( error );
@@ -83,6 +96,7 @@ const AuthProvider = ( { children } ) => {
             setUser( currentUser );
             if ( currentUser ) {
                 requestAccessToken( currentUser.uid );
+                addUserToDatabase( currentUser.uid );
             } else {
                 sessionStorage.removeItem( 'access-token' );
             }
