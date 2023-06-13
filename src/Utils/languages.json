@@ -1,0 +1,50 @@
+[
+    {
+        "name": "Bangla",
+        "image": "https://i.ibb.co/6D19jvJ/Bangladesh.png"
+    },
+    {
+        "name": "English",
+        "image": "https://i.ibb.co/0BctMpQ/uk.png"
+    },
+    {
+        "name": "Russian",
+        "image": "https://i.ibb.co/6X9cXz6/russia.png"
+    },
+    {
+        "name": "Mandarin",
+        "image": "https://i.ibb.co/HXfL6MX/china.png"
+    },
+    {
+        "name": "Danish",
+        "image": "https://i.ibb.co/JrkMbQW/de.png"
+    },
+    {
+        "name": "German",
+        "image": "https://i.ibb.co/bg5x1cc/germany.png"
+    },
+    {
+        "name": "Danish",
+        "image": "https://i.ibb.co/JrkMbQW/de.png"
+    },
+    {
+        "name": "Indonesian",
+        "image": "https://i.ibb.co/d4RZYXj/id.png"
+    },
+    {
+        "name": "Iran",
+        "image": "https://i.ibb.co/2MsxZ21/iran.png"
+    },
+    {
+        "name": "Italian",
+        "image": "https://i.ibb.co/wK2T3R8/italy.png"
+    },
+    {
+        "name": "Portuguese",
+        "image": "https://i.ibb.co/vXVktht/pt.png"
+    },
+    {
+        "name": "Filipino",
+        "image": "https://i.ibb.co/cyjYXTP/ph.png"
+    }
+]

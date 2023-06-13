@@ -2,6 +2,7 @@
     {
         "title": "Dutch Delight",
         "image": "https://i.ibb.co/S78cNtR/Dutch-Delight.png",
+        "language": "Dutch",
         "availableSeats": 60,
         "price": 30,
         "instructor": {
@@ -13,6 +14,7 @@
     },
     {
         "title": "Spanish Sunseekers",
+        "language": "Spanish",
         "image": "https://i.ibb.co/L1PGxSV/Spanish-Sunseekers.png",
         "availableSeats": 80,
         "price": 49.90,
@@ -26,6 +28,7 @@
     {
         "title": "French Fantastique",
         "image": "https://i.ibb.co/Hd814zj/French-Fantastique.png",
+        "language": "French",
         "availableSeats": 50,
         "price": 28,
         "instructor": {
@@ -37,6 +40,7 @@
     },
     {
         "title": "Mandarin Magic",
+        "language": "Mandarin",
         "image": "https://i.ibb.co/mtBV82c/Mandarin-Magic.png",
         "availableSeats": 100,
         "price": 19,
@@ -49,6 +53,7 @@
     },
     {
         "title": "Italian Immersion",
+        "language": "Dutch",
         "image": "https://i.ibb.co/q9YyVCc/Italian-Immersion.png",
         "availableSeats": 200,
         "price": 54.9,
