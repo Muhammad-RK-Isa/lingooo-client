@@ -98,7 +98,7 @@ const Navbar = () => {
                             Classes
                         </Link>
                         <Link
-                            to='/instructors'
+                            to='/dashboard'
                             className="text-xl duration-200 hover:opacity-40"
                         >
                             Dashboard

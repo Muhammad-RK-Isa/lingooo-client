@@ -9,8 +9,8 @@ import { BanknotesIcon } from "@heroicons/react/24/solid";
 import { motion } from 'framer-motion';
 
 const ClassCardMin = ( { data } ) => {
-    const { _id, title, image, enrolled, price } = data;
-    // console.log( title );
+    const { title, image, enrolled, price } = data;
+
     const variants = {
         hidden: {
             y: '100%',

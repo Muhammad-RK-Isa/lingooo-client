@@ -95,13 +95,13 @@ const Home_Navbar = () => {
                 <div className="flex gap-8 items-center justify-self-end">
                     <div className="hidden lg:flex gap-8 items-center">
                         <Link
-                            to='/'
+                            to='/classes'
                             className="text-xl duration-200 hover:opacity-40"
                         >
                             Classes
                         </Link>
                         <Link
-                            to='/instructors'
+                            to='/dashboard'
                             className="text-xl duration-200 hover:opacity-40"
                         >
                             Dashboard
