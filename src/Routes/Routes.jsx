@@ -38,25 +38,25 @@ const routes = createBrowserRouter( [
             },
             {
                 path: '/classes',
-                element: <Classes/>
+                element: <Classes />
             }
         ]
     },
     {
         path: '/dashboard',
-        element: <Dashboard />,
+        element: <RestrictedRoute><Dashboard /></RestrictedRoute>,
         children: [
             {
                 path: 'student',
-                element: <RestrictedRoute><Dashboard_Student /></RestrictedRoute>
+                element: <Dashboard_Student />
             },
             {
                 path: 'instructor',
-                element: <Dashboard_Instructor/>
+                element: <Dashboard_Instructor />
             },
             {
                 path: 'admin',
-                element: <Dashboard_Admin/>
+                element: <Dashboard_Admin />
             }
         ]
     },
