@@ -1,8 +1,8 @@
-import axios from 'axios';
 import { useQuery } from '@tanstack/react-query';
+import axios from 'axios';
 
 const fetchClasses = async ( quantity ) => {
-    const url = quantity ? `http://192.168.0.179:5000/classes?quantity=${ quantity }` : 'http://192.168.0.179:5000/classes';
+    const url = quantity ? `${ import.meta.env.VITE_BACKEND_URL}/classes?quantity=${ quantity }` : 'impot.meta.env.VITE_BACKEND_URL/classes';
     const response = await axios.get( url );
     return response.data;
 };

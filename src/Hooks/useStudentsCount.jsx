@@ -1,8 +1,8 @@
-import axios from 'axios';
 import { useQuery } from '@tanstack/react-query';
+import axios from 'axios';
 
 const getStudentsCount = async ( uid ) => {
-    const response = await axios.get( `http://192.168.0.179:5000/instructors/students/count/${uid}` );
+    const response = await axios.get( `${ import.meta.env.VITE_BACKEND_URL}/instructors/students/count/${ uid }` );
     return response.data.totalEnrollments;
 };
 
