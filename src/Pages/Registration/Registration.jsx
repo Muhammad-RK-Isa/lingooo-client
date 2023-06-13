@@ -18,6 +18,7 @@ import { AiFillEye, AiFillEyeInvisible } from 'react-icons/ai';
 import Cropper from 'react-easy-crop';
 import getCroppedImg from '../../Utils/getCroppedImg';
 import axios from 'axios';
+import { RxCross2 } from 'react-icons/rx';
 
 
 const Registration = () => {
@@ -31,14 +32,24 @@ const Registration = () => {
     const [ confirmHidden, setConfirmHidden ] = useState( true );
     const [ selectedImage, setSelectedImage ] = useState( null );
     const [ croppedImage, setCroppedImage ] = useState( null );
+    const [ imageName, setImageName ] = useState( null );
 
     const handleImageChange = ( event ) => {
         const file = event.target.files[ 0 ];
         if ( file ) {
+            setImageName( file.name );
             setSelectedImage( URL.createObjectURL( file ) );
         } else {
+            setImageName( null );
             setSelectedImage( null );
         }
+    };
+
+    const clearImageInput = ( e ) => {
+        e.preventDefault();
+        setSelectedImage( null );
+        setImageName( null );
+        document.getElementById( 'profilePicture' ).value = '';
     };
 
     // ! --------------------------------------------- //
@@ -55,32 +66,31 @@ const Registration = () => {
     const onCropComplete = async ( _, croppedAreaPixels ) => {
         try {
             const croppedImage = await getCroppedImg( selectedImage, croppedAreaPixels );
-            setCroppedImage( croppedImage );
-            console.log( croppedImage );
+            const croppedFile = new File( [ croppedImage ], imageName );
+            setCroppedImage( croppedFile );
         } catch ( error ) {
+            toast.error( "Image could not be processed." );
             console.error( 'Error cropping image:', error );
         }
     };
 
+
     // ! ------------------------------------------ //
 
-    const onSubmit = async ( { name, email, password, profilePicture } ) => {
+    const onSubmit = async ( { name, email, password } ) => {
 
-        const formDataImage = new FormData();
-        formDataImage.append( 'image', croppedImage );
-        formDataImage.append( 'key', import.meta.env.VITE_IMAGEBB_API_KEY );
-        console.log( formDataImage );
-
+        const formData = new FormData();
+        formData.append( 'image', croppedImage );
+        formData.append( 'key', import.meta.env.VITE_IMAGEBB_API_KEY );
         try {
-            // const response = await fetch( 'https://api.imgbb.com/1/upload', {
-            //     method: 'POST',
-            //     body: formDataImage
-            // } );
             setIsLoading( true );
-            const response = await axios.post( 'https://api.imgbb.com/1/upload', formDataImage );
-            const data = await response.json();
-            const photoURL = await data?.data?.url;
-            console.log( photoURL );
+            const data = await axios.post( 'https://api.imgbb.com/1/upload', formData, {
+                headers: {
+                    'Content-Type': 'multipart/form-data'
+                }
+            } );
+            // ! (-_-) //
+            const photoURL = await data.data.data?.url;
             try {
                 await signUp( email, password );
                 await updateUserProfile( name, photoURL );
@@ -94,6 +104,7 @@ const Registration = () => {
                 } );
             }
         } catch ( error ) {
+            console.log( error );
             setIsLoading( false );
             toast.error( 'Something went wrong!' );
         };
@@ -113,6 +124,11 @@ const Registration = () => {
             navigate( previousLocation );
         }
     }, [ user ] );
+
+    // useEffect(() => {
+    //     console.log( selectedImage );
+    // }, [selectedImage])
+
 
 
     return (
@@ -201,18 +217,25 @@ const Registration = () => {
                         <div className='border dark:border-2 rounded-lg w-full relative'>
                             <label htmlFor="profilePicture" className="flex items-center gap-3 text-sm p-2">
                                 <FcAddImage size={ 32 } className='box-content' />
-                                <span className='text-blue-gray-400'>Choose a profile picture (optional)</span>
+                                <span className='text-blue-gray-400 flex-1'>{ imageName ? 'Selected: ' + imageName : 'Choose a profile picture (optional)' }</span>
                                 <input
                                     { ...register( 'profilePicture', { required: false } ) }
-                                    type="file"
                                     id='profilePicture'
+                                    type="file"
+                                    accept=".jpeg, .jpg, .png, .webp"
                                     onChange={ handleImageChange }
                                     className='invisible absolute top-0 left-0 w-full h-full'
                                 />
+                                {
+                                    selectedImage &&
+                                    <Button onClick={ clearImageInput } color='red' size='sm' className='w-2 h-4 m-0 box-content grid place-content-center rounded'>
+                                        <RxCross2 size={ 20 } className='box-content text-white' />
+                                    </Button>
+                                }
                             </label>
                             {
                                 selectedImage &&
-                                <div className='p-6 grid place-content-center border dark:border-2 rounded-lg w-full h-40 relative'>
+                                <div className='p-6 grid place-content-center border-t w-full h-40 relative'>
                                     <Cropper
                                         image={ selectedImage }
                                         crop={ crop }

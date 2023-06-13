@@ -81,12 +81,11 @@ const AuthProvider = ( { children } ) => {
     useEffect( () => {
         const unsubscribe = onAuthStateChanged( auth, currentUser => {
             setUser( currentUser );
-            // TODO: setup JWT
-            // if ( currentUser ) {
-            //     requestAccessToken( currentUser.uid );
-            // } else {
-            //     sessionStorage.removeItem( 'access-token' );
-            // }
+            if ( currentUser ) {
+                requestAccessToken( currentUser.uid );
+            } else {
+                sessionStorage.removeItem( 'access-token' );
+            }
             setIsLoading( false );
         } );
 

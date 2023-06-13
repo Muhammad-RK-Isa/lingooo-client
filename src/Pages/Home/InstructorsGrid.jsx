@@ -52,36 +52,6 @@ const InstructorsGrid = () => {
                     <InstructorCardMin />
                 </SwiperSlide>
             </Swiper>
-
-            {/* <Swiper
-                slidesPerView={ 3 }
-                spaceBetween={ 6 }
-                pagination={ {
-                    clickable: true,
-                } }
-                loop={ true }
-                modules={ [ Pagination ] }
-                className="flex lg:hidden pb-12 instructors-swiper"
-            >
-                <SwiperSlide>
-                    <InstructorCardMin />
-                </SwiperSlide>
-                <SwiperSlide>
-                    <InstructorCardMin />
-                </SwiperSlide>
-                <SwiperSlide>
-                    <InstructorCardMin />
-                </SwiperSlide>
-                <SwiperSlide>
-                    <InstructorCardMin />
-                </SwiperSlide>
-                <SwiperSlide>
-                    <InstructorCardMin />
-                </SwiperSlide>
-                <SwiperSlide>
-                    <InstructorCardMin />
-                </SwiperSlide>
-            </Swiper> */}
         </>
     );
 };
