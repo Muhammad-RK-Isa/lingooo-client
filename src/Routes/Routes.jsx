@@ -3,9 +3,6 @@ import Main from "../Layouts/Main/Main";
 import Home from "../Pages/Home/Home";
 import Instructors from "../Pages/Instructors/Instructors";
 import Dashboard from '../Layouts/Dashboard/Dashboard';
-import Dashboard_Student from '../Pages/Dashboard/Dashboard_Student/Dashboard_Student';
-import Dashboard_Instructor from '../Pages/Dashboard/Dashboard_Instructor/Dashboard_Instructor';
-import Dashboard_Admin from '../Pages/Dashboard/Dashboard_Admin/Dashboard_Admin';
 import Login from "../Pages/Login/Login";
 import Registration from './../Pages/Registration/Registration';
 import RestrictedRoute from './RestrictedRoute';
@@ -39,25 +36,11 @@ const routes = createBrowserRouter( [
             {
                 path: '/classes',
                 element: <Classes />
-            }
-        ]
-    },
-    {
-        path: '/dashboard',
-        element: <RestrictedRoute><Dashboard /></RestrictedRoute>,
-        children: [
-            {
-                path: 'student',
-                element: <Dashboard_Student />
             },
             {
-                path: 'instructor',
-                element: <Dashboard_Instructor />
+                path: '/dashboard/*',
+                element: <RestrictedRoute><Dashboard /></RestrictedRoute>,
             },
-            {
-                path: 'admin',
-                element: <Dashboard_Admin />
-            }
         ]
     },
     {

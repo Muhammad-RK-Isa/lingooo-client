@@ -1,14 +1,14 @@
 import { useQuery } from '@tanstack/react-query';
+import useAxiosSecure from './useAxiosSecure';
 import useAuth from './useAuth';
 
-const getRole = async ( uid ) => {
-    const response = await fetch( `${ import.meta.env.VITE_BACKEND_URL }/user/role/${ uid }` );
-    return response.data;
-};
-
-const useRole = () => {
+const useRole = ( ) => {
     const { user } = useAuth();
-    const { refetch, data: role = {}, isLoading, isError } = useQuery( [ 'role', user?.uid ], () => getRole( user?.uid ) );
+    const { axiosSecure } = useAxiosSecure();
+    const { refetch, data: role = {}, isLoading, isError } = useQuery( [ 'role', user?.uid ], async () => {
+        const response = await axiosSecure.get( `/auth/verify_user_role/${ user?.uid }` );
+        return response.data;
+    });
     return {
         refetch,
         role,

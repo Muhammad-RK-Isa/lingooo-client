@@ -2,7 +2,7 @@ import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';
 
 const fetchClasses = async ( quantity ) => {
-    const url = quantity ? `${ import.meta.env.VITE_BACKEND_URL}/classes?quantity=${ quantity }` : 'impot.meta.env.VITE_BACKEND_URL/classes';
+    const url = quantity ? `${ import.meta.env.VITE_BACKEND_URL }/classes?quantity=${ quantity }` : `${ import.meta.env.VITE_BACKEND_URL }/classes`;
     const response = await axios.get( url );
     return response.data;
 };
