@@ -12,28 +12,51 @@ import LazyLoader from './LazyLoader';
 import useRole from "../Hooks/useRole";
 import { toast } from "react-hot-toast";
 import Swal from "sweetalert2";
+import { useEffect, useState } from "react";
+import useAuth from "../Hooks/useAuth";
+import useAxiosSecure from "../Hooks/useAxiosSecure";
 
 const ClassCard = ( { classData } ) => {
-
-    const { availableSeats, title, image, enrolled, price } = classData;
+    const { axiosSecure } = useAxiosSecure();
+    const { user } = useAuth();
+    const [ enrollable, setEnrollable ] = useState( true );
+    const { _id, availableSeats, title, image, enrolled, price } = classData;
     const { role } = useRole();
-    const enrollable = ( role === 'student' && availableSeats > 0 );
+
     const handleEnrollment = () => {
+        if ( !user ) {
+            toast.error( 'Please login to enroll!' );
+            return;
+        }
+
         if ( enrollable ) {
             try {
                 Swal.fire( {
-                    title: 'Do you want to save the changes?',
-                    showDenyButton: true,
+                    title: 'Do you want to add this class?',
+                    showDenyButton: false,
                     showCancelButton: true,
-                    confirmButtonText: 'Enroll',
+                    confirmButtonText: 'Add',
                     customClass: {
-                        confirmButton: '!bg-gradient-tr !from-primary !to-secondary'
+                        confirmButton: '!bg-gradient-to-tr !from-primary !to-secondary',
+                        cancelButton: "!bg-red-400 !text-white !hover:bg-red-500 !hover:text-white"
                     }
                 } ).then( ( result ) => {
                     if ( result.isConfirmed ) {
-                        Swal.fire( 'Saved!', '', 'success' );
-                    } else if ( result.isDenied ) {
-                        Swal.fire( 'Changes are not saved', '', 'info' );
+                        ( async () => {
+                            try {
+                                const response = await axiosSecure.patch( `/users/add_class`, {
+                                    uid: user.uid,
+                                    classId: _id
+                                } );
+                                console.log( response.data );
+                                toast.success( 'Class added!' );
+                            } catch ( error ) {
+                                console.log();
+                                if ( error.response?.status === 409 ) {
+                                    toast.error( 'Class already added!' );
+                                }
+                            }
+                        } )();
                     }
                 } );
             } catch ( error ) {
@@ -43,6 +66,18 @@ const ClassCard = ( { classData } ) => {
             toast.error( 'Something went wrong!' );
         }
     };
+
+    useEffect( () => {
+        if ( role.role !== 'student' ) {
+            setEnrollable( false );
+        }
+    }, [ role.role ] );
+
+    useEffect( () => {
+        if ( availableSeats > 1 ) {
+            setEnrollable( true );
+        }
+    }, [ availableSeats, user ] );
 
     return (
         <>
@@ -102,7 +137,7 @@ const ClassCard = ( { classData } ) => {
                         </CardBody>
                         <CardFooter className="flex items-center justify-between p-4 pt-0 mt-auto">
                             <Button
-                                disabled={ !!enrollable }
+                                disabled={ !enrollable }
                                 className={ `${ availableSeats < 1 ? 'bg-gray-500' : 'bg-gradient-to-tl' } w-full from-secondary to-primary` }
                                 onClick={ handleEnrollment }
                             >
@@ -110,7 +145,7 @@ const ClassCard = ( { classData } ) => {
                                     availableSeats < 1 ?
                                         'No seats available'
                                         :
-                                        'Enroll'
+                                        'Add'
                                 }
                             </Button>
                         </CardFooter>

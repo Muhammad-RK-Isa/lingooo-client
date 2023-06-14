@@ -7,6 +7,7 @@ import { loadStripe } from '@stripe/stripe-js';
 import { CardElement, Elements, useElements, useStripe } from '../../src';
 
 import '../styles/common.css';
+import { toast } from 'react-hot-toast';
 
 const Checkout = () => {
 
@@ -32,6 +33,7 @@ const Checkout = () => {
         } );
 
         if ( error ) {
+            toast.error( error.message );
             setCardError( error.message );
             console.log( '[error]', error );
         } else {
