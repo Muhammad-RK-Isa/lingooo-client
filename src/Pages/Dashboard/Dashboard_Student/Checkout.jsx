@@ -2,15 +2,14 @@
 // Learn how to accept a payment using the official Stripe docs.
 // https://stripe.com/docs/payments/accept-a-payment#web
 
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { loadStripe } from '@stripe/stripe-js';
-import { CardElement, Elements, useElements, useStripe } from '../../src';
-
-import '../styles/common.css';
 import { toast } from 'react-hot-toast';
+import { DashboardContext } from '../../../Layouts/Dashboard/Dashboard';
+import { CardElement, useElements, useStripe } from '@stripe/react-stripe-js';
 
 const Checkout = () => {
-
+    const { selectedClass, setSelectedClass } = useContext( DashboardContext );
     const [ cardError, setCardError ] = useState( null );
     const stripe = useStripe();
     const elements = useElements();

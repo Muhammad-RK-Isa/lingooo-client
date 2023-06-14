@@ -78,23 +78,6 @@ const Sidepanel_Main = () => {
                             Dashboard
                         </ListItem>
                     </Link>
-                    <Link to="/dashboard" onClick={ closeDrawer }>
-                        <ListItem className="dark:text-white">
-                            <ListItemPrefix>
-                                <ShoppingBagIcon className="h-5 w-5" />
-                            </ListItemPrefix>
-                            Cart
-                            <ListItemSuffix>
-                                <Chip
-                                    value="14"
-                                    size="sm"
-                                    variant="ghost"
-                                    color="blue-gray"
-                                    className="rounded-full dark:text-white"
-                                />
-                            </ListItemSuffix>
-                        </ListItem>
-                    </Link>
                 </List>
             </Drawer>
         </Transition>

@@ -7,6 +7,8 @@ import Login from "../Pages/Login/Login";
 import Registration from './../Pages/Registration/Registration';
 import RestrictedRoute from './RestrictedRoute';
 import Classes from "../Pages/Classes/Classes";
+import Payment from "../Pages/Dashboard/Dashboard_Student/Payment";
+import Error from "../Pages/Error/Error";
 
 const routes = createBrowserRouter( [
     {
@@ -38,14 +40,24 @@ const routes = createBrowserRouter( [
                 element: <Classes />
             },
             {
-                path: '/dashboard/*',
+                path: '/dashboard',
                 element: <RestrictedRoute><Dashboard /></RestrictedRoute>,
+                children: [
+                    {
+                        path: 'payment',
+                        element: <Payment />
+                    }
+                ]
             },
+            {
+                path: '*',
+                element: <Navigate to='error' />
+            }
         ]
     },
     {
-        path: '*',
-        element: <Navigate to='/error' />
+        path: 'error',
+        element: <Error />
     }
 ] );
 

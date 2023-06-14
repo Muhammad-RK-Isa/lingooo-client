@@ -3,7 +3,7 @@ import logo from '../../assets/svg/logo-gradient.svg';
 const Footer = () => {
     return (
         <footer className="w-full">
-            <div className='grid md:grid-cols-2 gap-8 lg:gap-20 p-10 max-w-screen-xl mx-auto'>
+            <div className='grid grid-cols-2 gap-8 lg:gap-20 py-10 px-2 lg:p-10 lg:max-w-screen-xl mx-auto'>
                 <div className='flex flex-col gap-4 it h-max'>
                     <img src={ logo } alt="logo" className="w-48 h-max" />
                     <p className='text-2xl'>Lingooo Inc.</p>

@@ -18,17 +18,11 @@ import useRole from './../../../Hooks/useRole';
 import { DashboardContext } from "../../../Layouts/Dashboard/Dashboard";
 import { Navigate } from "react-router-dom";
 
-const SelectedClassesCard = ( { classData } ) => {
+const InstructorClassCard = ( { classData } ) => {
     const { axiosSecure } = useAxiosSecure();
     const { user } = useAuth();
-    const [ enrollable, setEnrollable ] = useState( true );
-    const { _id, availableSeats, title, image, enrolled, price } = classData;
+    const { _id, availableSeats, title, image, enrolled, price, status } = classData;
     const { role } = useRole();
-    const { selectedClass, setSelectedClass } = useContext( DashboardContext );
-    const handlePayment = () => {
-        setSelectedClass( classData );
-        return <Navigate to="/dashboard/payment" replace={ true }/>;
-    };
 
     return (
         <>
@@ -110,4 +104,4 @@ const SelectedClassesCard = ( { classData } ) => {
     );
 };
 
-export default SelectedClassesCard;
+export default InstructorClassCard;

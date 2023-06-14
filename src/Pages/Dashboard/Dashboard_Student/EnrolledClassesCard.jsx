@@ -24,7 +24,7 @@ const EnrolledClassesCard = ( { classData } ) => {
     const { role } = useRole();
 
     const handlePayment = () => {
-
+        
     };
 
     return (
