@@ -6,15 +6,11 @@ import {
     Typography,
     Button
 } from "@material-tailwind/react";
-import { TiTick } from "react-icons/ti";
-import { BsArrowRight } from "react-icons/bs";
-import LazyLoader from "../../../Components/LazyLoader";
-import { toast } from "react-hot-toast";
-import Swal from "sweetalert2";
 import { useState } from "react";
-import useAuth from '../../../Hooks/useAuth';
-import useAxiosSecure from '../../../Hooks/useAxiosSecure';
-import useRole from '../../../Hooks/useRole';
+import useAuth from '../../Hooks/useAuth';
+import useAxiosSecure from '../../Hooks/useAxiosSecure';
+import useRole from '../../Hooks/useRole';
+import LazyLoader from "../../Components/LazyLoader";
 
 const EnrolledClassesCard = ( { classData } ) => {
     const { axiosSecure } = useAxiosSecure();

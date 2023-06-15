@@ -8,9 +8,12 @@ import Header from '../../Shared/Header/Header';
 import Home_Navbar from './Home_Navbar';
 import scrollToTopOnRender from '../../Utils/scrollToTopOnRender';
 import useAxiosSecure from '../../Hooks/useAxiosSecure';
+import useRole from '../../Hooks/useRole';
 
 
 const Home = () => {
+    const { role } = useRole();
+    console.log( role );
     scrollToTopOnRender();
     const { axiosSecure } = useAxiosSecure();
     useEffect(() => {

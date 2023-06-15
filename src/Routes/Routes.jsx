@@ -1,14 +1,18 @@
 import { Navigate, createBrowserRouter } from "react-router-dom";
+import Dashboard from '../Layouts/Dashboard/Dashboard';
 import Main from "../Layouts/Main/Main";
+import Classes from "../Pages/Classes/Classes";
+import Error from "../Pages/Error/Error";
 import Home from "../Pages/Home/Home";
 import Instructors from "../Pages/Instructors/Instructors";
-import Dashboard from '../Layouts/Dashboard/Dashboard';
 import Login from "../Pages/Login/Login";
 import Registration from './../Pages/Registration/Registration';
+import DashboardRoute from "./DashboardRoute";
 import RestrictedRoute from './RestrictedRoute';
-import Classes from "../Pages/Classes/Classes";
-import Payment from "../Pages/Dashboard/Dashboard_Student/Payment";
-import Error from "../Pages/Error/Error";
+import Dashboard_Student from "../Pages/Dashboard_Student/Dashboard_Student";
+import Dashboard_Instructor from "../Pages/Dashboard_Instructor/Dashboard_Instructor";
+import Dashboard_Admin from "../Pages/Dashboard_Admin/Dashboard_Admin";
+import Payment from './../Pages/Payment/Payment';
 
 const routes = createBrowserRouter( [
     {
@@ -24,10 +28,6 @@ const routes = createBrowserRouter( [
                 element: <Instructors />
             },
             {
-                path: '/error',
-                element: <Error />
-            },
-            {
                 path: '/login',
                 element: <Login />
             },
@@ -39,19 +39,27 @@ const routes = createBrowserRouter( [
                 path: '/classes',
                 element: <Classes />
             },
+        ]
+    },
+    {
+        path: 'dashboard',
+        element: <RestrictedRoute><Dashboard /></RestrictedRoute>,
+        children: [
             {
-                path: '/dashboard',
-                element: <RestrictedRoute><Dashboard /></RestrictedRoute>,
-                children: [
-                    {
-                        path: 'payment',
-                        element: <Payment />
-                    }
-                ]
+                path: 'student',
+                element: <DashboardRoute><Dashboard_Student /></DashboardRoute>
             },
             {
-                path: '*',
-                element: <Navigate to='error' />
+                path: 'instructor',
+                element: <DashboardRoute><Dashboard_Instructor /></DashboardRoute>
+            },
+            {
+                path: 'admin',
+                element: <DashboardRoute><Dashboard_Admin /></DashboardRoute>
+            },
+            {
+                path: 'payment/:_id',
+                element: <Payment />
             }
         ]
     },

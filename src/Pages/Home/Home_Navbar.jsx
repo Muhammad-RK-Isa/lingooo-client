@@ -9,11 +9,13 @@ import { MdLightMode, MdNightlight } from 'react-icons/md';
 import { Link } from 'react-router-dom';
 import useAuth from '../../Hooks/useAuth';
 import Swal from 'sweetalert2';
+import useRole from '../../Hooks/useRole';
 
 const Home_Navbar = () => {
     const { user, logOut } = useAuth();
     const { setIsOpen } = useContext( MainContext );
     const navRef = useRef();
+    const { role } = useRole();
 
     const [ isDark, setIsDark ] = useState( localStorage?.getItem( 'theme' ) === 'dark' ? true : false || false );
     const [ brandLogo, setBrandLogo ] = useState( logo_white );
@@ -101,7 +103,7 @@ const Home_Navbar = () => {
                             Classes
                         </Link>
                         <Link
-                            to='/dashboard'
+                            to={`dashboard/${role?.role}`}
                             className="text-xl duration-200 hover:opacity-40"
                         >
                             Dashboard

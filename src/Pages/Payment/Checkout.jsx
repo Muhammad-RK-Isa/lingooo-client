@@ -1,11 +1,7 @@
-// This example shows you how to set up React Stripe.js and use Elements.
-// Learn how to accept a payment using the official Stripe docs.
-// https://stripe.com/docs/payments/accept-a-payment#web
-
 import React, { useContext, useState } from 'react';
 import { loadStripe } from '@stripe/stripe-js';
 import { toast } from 'react-hot-toast';
-import { DashboardContext } from '../../../Layouts/Dashboard/Dashboard';
+import { DashboardContext } from '../../Layouts/Dashboard/Dashboard';
 import { CardElement, useElements, useStripe } from '@stripe/react-stripe-js';
 
 const Checkout = () => {

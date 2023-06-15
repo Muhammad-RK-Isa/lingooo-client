@@ -1,10 +1,10 @@
 import { Elements } from '@stripe/react-stripe-js';
 import { loadStripe } from '@stripe/stripe-js';
 import React, { useContext } from 'react';
+import { DashboardContext } from '../../Layouts/Dashboard/Dashboard';
 
 const stripePromise = loadStripe( `${ import.meta.env.VITE_STRIPE_PUBLIC_KEY }` );
 import Checkout from './Checkout';
-import { DashboardContext } from '../../../Layouts/Dashboard/Dashboard';
 
 const Payment = () => {
     const { selectedClass, setSelectedClass } = useContext( DashboardContext );

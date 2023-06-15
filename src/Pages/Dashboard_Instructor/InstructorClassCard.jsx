@@ -1,22 +1,22 @@
 import {
+    Button,
     Card,
-    CardHeader,
     CardBody,
     CardFooter,
-    Typography,
-    Button
+    CardHeader,
+    Typography
 } from "@material-tailwind/react";
-import { TiTick } from "react-icons/ti";
-import { BsArrowRight } from "react-icons/bs";
-import LazyLoader from "../../../Components/LazyLoader";
-import { toast } from "react-hot-toast";
-import Swal from "sweetalert2";
 import { useContext, useState } from "react";
-import useAuth from './../../../Hooks/useAuth';
-import useAxiosSecure from './../../../Hooks/useAxiosSecure';
-import useRole from './../../../Hooks/useRole';
-import { DashboardContext } from "../../../Layouts/Dashboard/Dashboard";
+import { toast } from "react-hot-toast";
+import { BsArrowRight } from "react-icons/bs";
+import { TiTick } from "react-icons/ti";
 import { Navigate } from "react-router-dom";
+import Swal from "sweetalert2";
+import LazyLoader from "../../Components/LazyLoader";
+import useAuth from '../../Hooks/useAuth';
+import useAxiosSecure from '../../Hooks/useAxiosSecure';
+import useRole from '../../Hooks/useRole';
+import { DashboardContext } from "../../Layouts/Dashboard/Dashboard";
 
 const InstructorClassCard = ( { classData } ) => {
     const { axiosSecure } = useAxiosSecure();
