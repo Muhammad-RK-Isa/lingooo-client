@@ -7,28 +7,45 @@ import {
     Button
 } from "@material-tailwind/react";
 import { TiTick } from "react-icons/ti";
-import { BsArrowRight } from "react-icons/bs";
 import LazyLoader from "../../Components/LazyLoader";
 import { toast } from "react-hot-toast";
 import Swal from "sweetalert2";
-import { useContext, useState } from "react";
-import useAuth from '../../Hooks/useAuth';
 import useAxiosSecure from '../../Hooks/useAxiosSecure';
-import useRole from '../../Hooks/useRole';
-import { DashboardContext } from "../../Layouts/Dashboard/Dashboard";
 import { Navigate } from "react-router-dom";
 import { RiDeleteBinLine } from 'react-icons/ri';
 
-const SelectedClassesCard = ( { classData } ) => {
+const SelectedClassesCard = ( { classData, refetch } ) => {
     const { axiosSecure } = useAxiosSecure();
-    const { user } = useAuth();
-    const [ enrollable, setEnrollable ] = useState( true );
-    const { _id, availableSeats, title, image, enrolled, price } = classData;
-    const { role } = useRole();
-    const { selectedClass, setSelectedClass } = useContext( DashboardContext );
+    const { _id, availableSeats, title, image, price } = classData;
+
     const handlePayment = () => {
         setSelectedClass( classData );
         return <Navigate to="/dashboard/payment" replace={ true } />;
+    };
+
+    const handleDeletion = () => {
+        Swal.fire( {
+            title: 'Are you sure you want to delete this class?',
+            showCancelButton: true,
+            confirmButtonText: 'Delete',
+            customClass: {
+                confirmButton: '!bg-red-500 !text-white',
+                cancelButton: '!bg-white !text-black'
+            }
+        } ).then( async ( result ) => {
+            if ( result.isConfirmed ) {
+                try {
+                    const response = await axiosSecure.delete( `/student/selected_classes/${ _id }` );
+                    if ( response.status === 200 ) {
+                        toast.success( 'Class deleted successfully' );
+                        refetch();
+                    }
+                }
+                catch ( error ) {
+                    toast.error( error.response.data.message );
+                }
+            };
+        } );
     };
 
     return (
@@ -90,10 +107,10 @@ const SelectedClassesCard = ( { classData } ) => {
                                         </Button>
                                         <Button
                                             color="red"
-                                            onClick={ handlePayment }
+                                            onClick={ handleDeletion }
                                             className="w-max px-3 shadow-none"
                                         >
-                                            <RiDeleteBinLine size={18} className="box-content"/>
+                                            <RiDeleteBinLine size={ 18 } className="box-content" />
                                         </Button>
                                     </>
                                     :

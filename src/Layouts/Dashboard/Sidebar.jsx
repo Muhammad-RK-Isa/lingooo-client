@@ -1,33 +1,34 @@
 import { useContext, useEffect, useState } from "react";
+import { Link } from 'react-router-dom';
 import {
     Card,
     Typography,
     List,
     ListItem,
     ListItemPrefix,
-    ListItemSuffix,
-    Chip,
     Accordion,
     AccordionHeader,
     AccordionBody,
 } from "@material-tailwind/react";
 import {
     PresentationChartBarIcon,
-    ShoppingBagIcon,
-    UserCircleIcon,
-    Cog6ToothIcon,
-    InboxIcon,
-    PowerIcon,
+    HomeIcon,
+    UserGroupIcon,
+    BookOpenIcon
 } from "@heroicons/react/24/solid";
 import { ChevronRightIcon, ChevronDownIcon } from "@heroicons/react/24/outline";
 import { motion, AnimatePresence } from 'framer-motion';
 import { DashboardContext } from "./Dashboard";
 
 const Sidebar = () => {
-    const { sideBarOpen, setSideBarOpen, selectedContents, setSelectedContents } = useContext( DashboardContext );
+    const { sideBarOpen, setSideBarOpen, setSelectedContents } = useContext( DashboardContext );
     const [ open, setOpen ] = useState( 0 );
     const handleOpen = ( value ) => {
         setOpen( open === value ? 0 : value );
+    };
+
+    const closeDrawer = () => {
+        setSideBarOpen( false );
     };
 
     useEffect( () => {
@@ -70,7 +71,7 @@ const Sidebar = () => {
                                     Dashboard
                                 </Typography>
                             </div>
-                            <List>
+                            <List className="text-dark dark:text-white">
                                 <Accordion
                                     open={ open === 1 }
                                     icon={
@@ -80,31 +81,31 @@ const Sidebar = () => {
                                         />
                                     }
                                 >
-                                    <ListItem className="p-0" selected={ open === 1 }>
+                                    <ListItem className="p-0 text-dark dark:text-white" selected={ open === 1 }>
                                         <AccordionHeader onClick={ () => handleOpen( 1 ) } className="border-b-0 p-3">
                                             <ListItemPrefix>
-                                                <PresentationChartBarIcon className="h-5 w-5" />
+                                                <PresentationChartBarIcon className="h-5 w-5 text-dark dark:text-white" />
                                             </ListItemPrefix>
-                                            <Typography color="blue-gray" className="mr-auto font-normal">
+                                            <Typography color="blue-gray" className="mr-auto font-normal text-dark dark:text-white">
                                                 Dashboard
                                             </Typography>
                                         </AccordionHeader>
                                     </ListItem>
-                                    <AccordionBody className="py-1">
-                                        <List className="p-0">
-                                            <ListItem>
+                                    <AccordionBody className="py-1 text-dark dark:text-white">
+                                        <List className="p-0 text-dark dark:text-white">
+                                            <ListItem onClick={ () => setSelectedContents( 'selectedClasses' ) }>
                                                 <ListItemPrefix>
                                                     <ChevronRightIcon strokeWidth={ 3 } className="h-3 w-5" />
                                                 </ListItemPrefix>
                                                 Selected Classes
                                             </ListItem>
-                                            <ListItem>
+                                            <ListItem onClick={ () => setSelectedContents( 'enrolledClasses' ) }>
                                                 <ListItemPrefix>
                                                     <ChevronRightIcon strokeWidth={ 3 } className="h-3 w-5" />
                                                 </ListItemPrefix>
                                                 Enrolled Classes
                                             </ListItem>
-                                            <ListItem>
+                                            <ListItem onClick={ () => setSelectedContents( 'myReviews' ) }>
                                                 <ListItemPrefix>
                                                     <ChevronRightIcon strokeWidth={ 3 } className="h-3 w-5" />
                                                 </ListItemPrefix>
@@ -113,70 +114,32 @@ const Sidebar = () => {
                                         </List>
                                     </AccordionBody>
                                 </Accordion>
-                                <Accordion
-                                    open={ open === 2 }
-                                    icon={
-                                        <ChevronDownIcon
-                                            strokeWidth={ 2.5 }
-                                            className={ `mx-auto h-4 w-4 transition-transform ${ open === 2 ? "rotate-180" : "" }` }
-                                        />
-                                    }
-                                >
-                                    <ListItem className="p-0" selected={ open === 2 }>
-                                        <AccordionHeader onClick={ () => handleOpen( 2 ) } className="border-b-0 p-3">
-                                            <ListItemPrefix>
-                                                <ShoppingBagIcon className="h-5 w-5" />
-                                            </ListItemPrefix>
-                                            <Typography color="blue-gray" className="mr-auto font-normal">
-                                                E-Commerce
-                                            </Typography>
-                                        </AccordionHeader>
-                                    </ListItem>
-                                    <AccordionBody className="py-1">
-                                        <List className="p-0">
-                                            <ListItem>
-                                                <ListItemPrefix>
-                                                    <ChevronRightIcon strokeWidth={ 3 } className="h-3 w-5" />
-                                                </ListItemPrefix>
-                                                Orders
-                                            </ListItem>
-                                            <ListItem>
-                                                <ListItemPrefix>
-                                                    <ChevronRightIcon strokeWidth={ 3 } className="h-3 w-5" />
-                                                </ListItemPrefix>
-                                                Products
-                                            </ListItem>
-                                        </List>
-                                    </AccordionBody>
-                                </Accordion>
+
                                 <hr className="my-2 border-blue-gray-50" />
-                                <ListItem>
-                                    <ListItemPrefix>
-                                        <InboxIcon className="h-5 w-5" />
-                                    </ListItemPrefix>
-                                    Inbox
-                                    <ListItemSuffix>
-                                        <Chip value="14" size="sm" variant="ghost" color="blue-gray" className="rounded-full" />
-                                    </ListItemSuffix>
-                                </ListItem>
-                                <ListItem>
-                                    <ListItemPrefix>
-                                        <UserCircleIcon className="h-5 w-5" />
-                                    </ListItemPrefix>
-                                    Profile
-                                </ListItem>
-                                <ListItem>
-                                    <ListItemPrefix>
-                                        <Cog6ToothIcon className="h-5 w-5" />
-                                    </ListItemPrefix>
-                                    Settings
-                                </ListItem>
-                                <ListItem>
-                                    <ListItemPrefix>
-                                        <PowerIcon className="h-5 w-5" />
-                                    </ListItemPrefix>
-                                    Log Out
-                                </ListItem>
+                                <Link to="/" onClick={ closeDrawer }>
+                                    <ListItem className="dark:text-white">
+                                        <ListItemPrefix>
+                                            <HomeIcon className="h-5 w-5" />
+                                        </ListItemPrefix>
+                                        Home
+                                    </ListItem>
+                                </Link>
+                                <Link to="/instructors" onClick={ closeDrawer }>
+                                    <ListItem className="dark:text-white">
+                                        <ListItemPrefix>
+                                            <UserGroupIcon className="h-5 w-5" />
+                                        </ListItemPrefix>
+                                        Instructors
+                                    </ListItem>
+                                </Link>
+                                <Link to="/classes" onClick={ closeDrawer }>
+                                    <ListItem className="dark:text-white">
+                                        <ListItemPrefix>
+                                            <BookOpenIcon className="h-5 w-5" />
+                                        </ListItemPrefix>
+                                        Classes
+                                    </ListItem>
+                                </Link>
                             </List>
                         </Card>
                     </motion.div>

@@ -4,6 +4,7 @@ import Loader from '../../Components/Loader';
 import Sidebar from './Sidebar';
 import useRole from '../../Hooks/useRole';
 import Nav from './Nav';
+import { Toaster } from 'react-hot-toast';
 
 export const DashboardContext = createContext();
 const Dashboard = () => {
@@ -11,10 +12,12 @@ const Dashboard = () => {
     const location = useLocation();
     const path = location.pathname.split( '/' )[ 2 ];
     const [ sideBarOpen, setSideBarOpen ] = useState( false );
-    const [ selectedContents, setSelectedContents ] = useState( null );
+    const [ selectedContents, setSelectedContents ] = useState( 'selectedClasses' );
     const props = {
         sideBarOpen,
-        setSideBarOpen
+        setSideBarOpen,
+        selectedContents,
+        setSelectedContents
     };
 
     if ( !path ) {
@@ -23,10 +26,11 @@ const Dashboard = () => {
 
     return (
         <DashboardContext.Provider value={ props }>
-            <main className='dark:bg-black'>
+            <main>
                 <Loader />
+                <Toaster/>
                 <Sidebar />
-                <div className='z-10 lg:ml-[20rem] bg-black bg-opacity-5'>
+                <div className='z-10 lg:ml-[20rem] bg-black bg-opacity-5 min-h-screen'>
                     <Nav />
                     <Outlet />
                 </div>
