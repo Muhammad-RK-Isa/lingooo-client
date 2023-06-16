@@ -30,7 +30,7 @@ const Dashboard = () => {
                 <Loader />
                 <Toaster/>
                 <Sidebar />
-                <div className='z-10 lg:ml-[20rem] bg-black bg-opacity-5 min-h-screen'>
+                <div className='z-10 lg:ml-[20rem] bg-black bg-opacity-5 min-h-screen overflow-hidden'>
                     <Nav />
                     <Outlet />
                 </div>
