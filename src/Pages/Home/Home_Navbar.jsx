@@ -103,7 +103,7 @@ const Home_Navbar = () => {
                             Classes
                         </Link>
                         <Link
-                            to={`dashboard/${role?.role}`}
+                            to={ `dashboard` }
                             className="text-xl duration-200 hover:opacity-40"
                         >
                             Dashboard

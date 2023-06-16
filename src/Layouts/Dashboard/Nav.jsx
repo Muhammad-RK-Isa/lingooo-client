@@ -1,19 +1,18 @@
-import logo from '../assets/svg/logo-gradient.svg';
-import logo_white from '../assets/svg/logo-white-transparent.svg';
-import { MainContext } from "../Layouts/Main/Main";
+import logo from '../../assets/svg/logo-gradient.svg';
 import { useContext, useEffect, useRef, useState } from "react";
 import { Button, Menu, MenuHandler, MenuList } from "@material-tailwind/react";
 import { CgProfile } from 'react-icons/cg';
 import { HiOutlineMenuAlt1 } from 'react-icons/hi';
 import { MdLightMode, MdNightlight } from 'react-icons/md';
 import { Link, useLocation } from 'react-router-dom';
-import useAuth from './../Hooks/useAuth';
+import useAuth from '../../Hooks/useAuth';
 import Swal from 'sweetalert2';
-import useRole from '../Hooks/useRole';
+import useRole from '../../Hooks/useRole';
+import { DashboardContext } from './Dashboard';
 
-const Navbar = () => {
+const Nav = () => {
     const { user, logOut } = useAuth();
-    const { setIsOpen } = useContext( MainContext );
+    const { setSideBarOpen } = useContext( DashboardContext );
     const navRef = useRef();
     const location = useLocation();
     const { role } = useRole();
@@ -52,20 +51,20 @@ const Navbar = () => {
         }
     }, [ isDark ] );
 
-    useEffect( () => {
+    // useEffect( () => {
 
-        window.addEventListener( 'scroll', () => {
-            const nav = navRef.current;
-            if ( window.scrollY > 20 ) {
-                nav.classList.add( 'bg-white', 'shadow-md', 'drop-shadow-md', 'dark:bg-black', 'dark:bg-opacity-50', 'dark:backdrop-blur' );
-            } else {
-                nav.classList.remove( 'bg-white', 'shadow-md', 'drop-shadow-md', 'dark:bg-black', 'dark:bg-opacity-50', 'dark:backdrop-blur' );
-            }
-        } );
-    }, [] );
+    //     window.addEventListener( 'scroll', () => {
+    //         const nav = navRef.current;
+    //         if ( window.scrollY > 20 ) {
+    //             nav.classList.add( 'bg-white', 'shadow-md', 'drop-shadow-md', 'dark:bg-black', 'dark:bg-opacity-50', 'dark:backdrop-blur' );
+    //         } else {
+    //             nav.classList.remove( 'bg-white', 'shadow-md', 'drop-shadow-md', 'dark:bg-black', 'dark:bg-opacity-50', 'dark:backdrop-blur' );
+    //         }
+    //     } );
+    // }, [] );
 
     return (
-        <nav ref={ navRef } className={ `${ location.pathname === '/' && 'hidden' } text-black dark:text-white w-full sticky top-0 z-20  duration-200 pl-2 pr-4 lg:p-0` }>
+        <nav ref={ navRef } className={ `bg-white dark:bg-dark text-black dark:text-white w-full sticky top-0 z-20  pl-2 pr-4 lg:p-0` }>
             <div className="flex items-center justify-between gap-8 w-full h-16 max-w-screen-xl mx-auto lg:py-2 box-content">
                 <div className="hidden lg:flex gap-8 items-center">
                     <Link
@@ -82,7 +81,7 @@ const Navbar = () => {
                     </Link>
                 </div>
 
-                <button onClick={ () => setIsOpen( true ) } className="p-2">
+                <button onClick={ () => setSideBarOpen( true ) } className="p-2">
                     <HiOutlineMenuAlt1 size={ 28 } className="lg:hidden box-content" />
                 </button>
 
@@ -100,7 +99,7 @@ const Navbar = () => {
                             Classes
                         </Link>
                         <Link
-                            to={ `dashboard` }
+                            to={ `dashboard/${ role?.role }` }
                             className="text-xl duration-200 hover:opacity-40"
                         >
                             Dashboard
@@ -157,4 +156,4 @@ const Navbar = () => {
     );
 };
 
-export default Navbar;
+export default Nav;

@@ -6,7 +6,6 @@ import {
     List,
     ListItem,
     ListItemPrefix,
-    ListItemSuffix,
     Chip,
 } from "@material-tailwind/react";
 import { XMarkIcon } from "@heroicons/react/24/outline";
@@ -14,7 +13,6 @@ import {
     PresentationChartBarIcon,
     ShoppingBagIcon,
     UserGroupIcon,
-    InboxIcon,
     BookOpenIcon,
     HomeIcon
 } from "@heroicons/react/24/solid";
