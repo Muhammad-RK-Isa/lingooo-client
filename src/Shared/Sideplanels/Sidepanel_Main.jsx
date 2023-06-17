@@ -24,7 +24,6 @@ import { Link } from 'react-router-dom';
 import useRole from "../../Hooks/useRole";
 
 const Sidepanel_Main = () => {
-    const { role } = useRole();
     const { isOpen, setIsOpen } = useContext( MainContext );
     const closeDrawer = () => setIsOpen( false );
     return (
@@ -70,7 +69,7 @@ const Sidepanel_Main = () => {
                             Classes
                         </ListItem>
                     </Link>
-                    <Link to={`dashboard/${role?.role}`} onClick={ closeDrawer }>
+                    <Link to={`dashboard`} onClick={ closeDrawer }>
                         <ListItem className="dark:text-white">
                             <ListItemPrefix>
                                 <PresentationChartBarIcon className="h-5 w-5" />

@@ -5,7 +5,7 @@ const ReviewCard = ( { reviewData } ) => {
     const { displayName, review, photoURL } = reviewData;
     return (
         <div className='flex flex-col gap-3 max-w-[20rem] mx-auto'>
-            <div class="bg-white dark:bg-opacity-80 message-icon max-w-[25rem] rounded-lg p-6 relative text-black">
+            <div className="bg-white dark:bg-opacity-80 message-icon max-w-[25rem] rounded-lg p-6 relative text-black">
                 {review}
             </div>
             <div className='mt-4 ml-4 inline-flex items-center gap-2 text-white'>

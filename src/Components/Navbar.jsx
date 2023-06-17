@@ -53,16 +53,36 @@ const Navbar = () => {
     }, [ isDark ] );
 
     useEffect( () => {
-
-        window.addEventListener( 'scroll', () => {
+        const handleScroll = () => {
             const nav = navRef.current;
             if ( window.scrollY > 20 ) {
-                nav.classList.add( 'bg-white', 'shadow-md', 'drop-shadow-md', 'dark:bg-black', 'dark:bg-opacity-50', 'dark:backdrop-blur' );
+                nav.classList.add(
+                    'bg-white',
+                    'shadow-md',
+                    'drop-shadow-md',
+                    'dark:bg-black',
+                    'dark:bg-opacity-50',
+                    'dark:backdrop-blur'
+                );
             } else {
-                nav.classList.remove( 'bg-white', 'shadow-md', 'drop-shadow-md', 'dark:bg-black', 'dark:bg-opacity-50', 'dark:backdrop-blur' );
+                nav.classList.remove(
+                    'bg-white',
+                    'shadow-md',
+                    'drop-shadow-md',
+                    'dark:bg-black',
+                    'dark:bg-opacity-50',
+                    'dark:backdrop-blur'
+                );
             }
-        } );
+        };
+
+        window.addEventListener( 'scroll', handleScroll );
+
+        return () => {
+            window.removeEventListener( 'scroll', handleScroll );
+        };
     }, [] );
+
 
     return (
         <nav ref={ navRef } className={ `${ location.pathname === '/' && 'hidden' } text-black dark:text-white w-full sticky top-0 z-20  duration-200 pl-2 pr-4 lg:p-0` }>

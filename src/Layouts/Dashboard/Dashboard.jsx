@@ -1,4 +1,4 @@
-import { createContext, useState } from 'react';
+import { createContext, useEffect, useState } from 'react';
 import { Navigate, Outlet, useLocation } from 'react-router-dom';
 import Loader from '../../Components/Loader';
 import Sidebar from './Sidebar';
@@ -8,7 +8,6 @@ import { Toaster } from 'react-hot-toast';
 
 export const DashboardContext = createContext();
 const Dashboard = () => {
-    const { role } = useRole();
     const location = useLocation();
     const path = location.pathname.split( '/' )[ 2 ];
     const [ sideBarOpen, setSideBarOpen ] = useState( false );
@@ -20,18 +19,15 @@ const Dashboard = () => {
         setSelectedContents
     };
 
-    if ( !path ) {
-        return <Navigate to={ `${ role?.role }` } />;
-    }
-
     return (
         <DashboardContext.Provider value={ props }>
             <main>
                 <Loader />
-                <Toaster/>
+                <Toaster />
                 <Sidebar />
                 <div className='z-10 lg:ml-[20rem] bg-black bg-opacity-5 min-h-screen overflow-hidden'>
                     <Nav />
+                    <div className='h-16 w-full' />
                     <Outlet />
                 </div>
             </main>

@@ -11,17 +11,12 @@ import LazyLoader from "../../Components/LazyLoader";
 import { toast } from "react-hot-toast";
 import Swal from "sweetalert2";
 import useAxiosSecure from '../../Hooks/useAxiosSecure';
-import { Navigate } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 import { RiDeleteBinLine } from 'react-icons/ri';
 
 const SelectedClassesCard = ( { classData, refetch } ) => {
     const { axiosSecure } = useAxiosSecure();
     const { _id, availableSeats, title, image, price } = classData;
-
-    const handlePayment = () => {
-        setSelectedClass( classData );
-        return <Navigate to="/dashboard/payment" replace={ true } />;
-    };
 
     const handleDeletion = () => {
         Swal.fire( {
@@ -98,13 +93,14 @@ const SelectedClassesCard = ( { classData, refetch } ) => {
                             {
                                 availableSeats > 0 ?
                                     <>
-                                        <Button
-                                            color="white"
-                                            onClick={ handlePayment }
-                                            className="w-full border-2 dark:border-none px-0 flex-1 shadow-none dark:bg-opacity-90"
-                                        >
-                                            Pay
-                                        </Button>
+                                        <Link to={ `/dashboard/payment/${ _id }` } className="w-full">
+                                            <Button
+                                                color="white"
+                                                className="w-full border-2 dark:border-none px-0 flex-1 shadow-none dark:bg-opacity-90"
+                                            >
+                                                Pay
+                                            </Button>
+                                        </Link>
                                         <Button
                                             color="red"
                                             onClick={ handleDeletion }

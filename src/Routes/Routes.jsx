@@ -47,11 +47,11 @@ const routes = createBrowserRouter( [
         children: [
             {
                 path: 'student',
-                element: <DashboardRoute><Dashboard_Student /></DashboardRoute>
+                element: <RestrictedRoute><DashboardRoute><Dashboard_Student /></DashboardRoute></RestrictedRoute>
             },
             {
                 path: 'instructor',
-                element: <DashboardRoute><Dashboard_Instructor /></DashboardRoute>
+                element: <RestrictedRoute><DashboardRoute><Dashboard_Instructor /></DashboardRoute></RestrictedRoute>
             },
             {
                 path: 'admin',
@@ -62,6 +62,10 @@ const routes = createBrowserRouter( [
                 element: <Payment />
             }
         ]
+    },
+    {
+        path: '*',
+        element: <Navigate to="error" />
     },
     {
         path: 'error',

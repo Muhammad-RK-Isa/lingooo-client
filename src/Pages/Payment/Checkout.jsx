@@ -3,6 +3,7 @@ import { loadStripe } from '@stripe/stripe-js';
 import { toast } from 'react-hot-toast';
 import { DashboardContext } from '../../Layouts/Dashboard/Dashboard';
 import { CardElement, useElements, useStripe } from '@stripe/react-stripe-js';
+import { Button } from '@material-tailwind/react';
 
 const Checkout = () => {
     const { selectedClass, setSelectedClass } = useContext( DashboardContext );
@@ -55,9 +56,10 @@ const Checkout = () => {
                     },
                 } }
             />
-            <button type="submit" disabled={ !stripe }>
+            
+            <Button type="submit" disabled={ !stripe }>
                 Pay
-            </button>
+            </Button>
         </form>
     );
 };

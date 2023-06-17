@@ -11,7 +11,7 @@ const useRole = () => {
     } );
     return {
         refetch,
-        role,
+        role: role?.role,
         isLoading,
         isError
     };

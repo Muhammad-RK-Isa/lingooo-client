@@ -50,8 +50,8 @@ const Nav = () => {
     }, [ isDark ] );
 
     return (
-        <nav className={ `bg-white dark:bg-dark text-black dark:text-white w-full sticky top-0 z-20  pl-2 pr-4 lg:p-0` }>
-            <div className="flex items-center justify-between gap-8 w-full h-16 max-w-screen-xl mx-auto lg:py-2 box-content">
+        <nav className={ `bg-white dark:bg-dark text-black dark:text-white w-full fixed top-0 right-0 z-20 pl-2 pr-4 lg:p-0` }>
+            <div className="flex items-center justify-between gap-8 w-full h-16 max-w-screen-xl ml-auto mr-10 lg:py-2">
                 <button onClick={ () => setSideBarOpen( true ) } className="p-2">
                     <HiOutlineMenuAlt1 size={ 28 } className="lg:hidden box-content" />
                 </button>
