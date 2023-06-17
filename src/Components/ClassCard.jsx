@@ -68,10 +68,10 @@ const ClassCard = ( { classData } ) => {
     };
 
     useEffect( () => {
-        if ( role.role !== 'student' ) {
+        if ( role !== 'student' ) {
             setEnrollable( false );
         }
-    }, [ role.role ] );
+    }, [ role ] );
 
     useEffect( () => {
         if ( availableSeats > 1 ) {

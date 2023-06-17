@@ -1,5 +1,5 @@
 import { useContext, useEffect, useState } from "react";
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import {
     Card,
     Typography,
@@ -19,16 +19,20 @@ import {
 import { ChevronRightIcon, ChevronDownIcon } from "@heroicons/react/24/outline";
 import { motion, AnimatePresence } from 'framer-motion';
 import { DashboardContext } from "./Dashboard";
+import useAuth from "../../Hooks/useAuth";
 
 const Sidebar = () => {
+
+    const navigate = useNavigate();
     const { sideBarOpen, setSideBarOpen, setSelectedContents } = useContext( DashboardContext );
     const [ open, setOpen ] = useState( 0 );
     const handleOpen = ( value ) => {
         setOpen( open === value ? 0 : value );
     };
 
-    const closeDrawer = () => {
-        setSideBarOpen( false );
+    const handleLink = async ( content ) => {
+        await setSelectedContents( content );
+        navigate( '/dashboard' );
     };
 
     useEffect( () => {
@@ -93,19 +97,19 @@ const Sidebar = () => {
                                     </ListItem>
                                     <AccordionBody className="py-1 text-dark dark:text-white">
                                         <List className="p-0 text-dark dark:text-white">
-                                            <ListItem onClick={ () => setSelectedContents( 'selectedClasses' ) }>
+                                            <ListItem onClick={ () => handleLink( 'selectedClasses' ) }>
                                                 <ListItemPrefix>
                                                     <ChevronRightIcon strokeWidth={ 3 } className="h-3 w-5" />
                                                 </ListItemPrefix>
                                                 Selected Classes
                                             </ListItem>
-                                            <ListItem onClick={ () => setSelectedContents( 'enrolledClasses' ) }>
+                                            <ListItem onClick={ () => handleLink( 'enrolledClasses' ) }>
                                                 <ListItemPrefix>
                                                     <ChevronRightIcon strokeWidth={ 3 } className="h-3 w-5" />
                                                 </ListItemPrefix>
                                                 Enrolled Classes
                                             </ListItem>
-                                            <ListItem onClick={ () => setSelectedContents( 'myReviews' ) }>
+                                            <ListItem onClick={ () => handleLink( 'myReviews' ) }>
                                                 <ListItemPrefix>
                                                     <ChevronRightIcon strokeWidth={ 3 } className="h-3 w-5" />
                                                 </ListItemPrefix>
@@ -116,7 +120,8 @@ const Sidebar = () => {
                                 </Accordion>
 
                                 <hr className="my-2 border-blue-gray-50" />
-                                <Link to="/" onClick={ closeDrawer }>
+
+                                <Link to="/">
                                     <ListItem className="dark:text-white">
                                         <ListItemPrefix>
                                             <HomeIcon className="h-5 w-5" />
@@ -124,7 +129,7 @@ const Sidebar = () => {
                                         Home
                                     </ListItem>
                                 </Link>
-                                <Link to="/instructors" onClick={ closeDrawer }>
+                                <Link to="/instructors">
                                     <ListItem className="dark:text-white">
                                         <ListItemPrefix>
                                             <UserGroupIcon className="h-5 w-5" />
@@ -132,7 +137,7 @@ const Sidebar = () => {
                                         Instructors
                                     </ListItem>
                                 </Link>
-                                <Link to="/classes" onClick={ closeDrawer }>
+                                <Link to="/classes">
                                     <ListItem className="dark:text-white">
                                         <ListItemPrefix>
                                             <BookOpenIcon className="h-5 w-5" />

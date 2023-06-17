@@ -15,6 +15,10 @@ const Dashboard_Student = () => {
     const { enrolledClasses } = useEnrolledClasses();
     const { reviews } = useReviews();
     const { selectedContents } = useContext( DashboardContext );
+    useEffect(() => {
+        console.log( enrolledClasses );
+    }, [enrolledClasses])
+    
 
     return (
         <div className='max-w-screen-xl mx-2 lg:mx-auto mt-6 lg:mt-8'>

@@ -53,7 +53,7 @@ const EnrolledClassesCard = ( { classData } ) => {
                             <Button
                                 color="white"
                                 onClick={ handlePayment }
-                                className="w-full border-2 dark:border-none px-0"
+                                className="w-full border-2 dark:border-none px-0 mx-4"
                             >
                                 Write a review
                             </Button>
