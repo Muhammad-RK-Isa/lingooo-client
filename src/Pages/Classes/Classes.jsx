@@ -25,9 +25,9 @@ const Classes = () => {
     }, [selected])
     return (
         <>
-            <div className='flex flex-col lg:flex-row items-center justify-between gap-4 w-full lg:max-w-screen-xl px-2 lg:mx-auto mt-4'>
-                <h1 className='text-2xl font-semibold text-left w-full px-2'>Select your desired class.</h1>
-                <Listbox value={ selected } onChange={ setSelected } className="w-full lg:min-w-[20rem] mx-auto px-4 z-10">
+            <div className='flex flex-col lg:flex-row items-center justify-between gap-4 w-full lg:max-w-screen-xl px-2 lg:mx-auto mt-4 lg:mt-10'>
+                <h1 className='text-2xl lg:text-4xl font-semibold text-left w-full px-2 lg:px-0'>Every language class you need.</h1>
+                <Listbox value={ selected } onChange={ setSelected } className="w-full lg:max-w-[20rem] mx-auto px-4 z-10">
                     <div className="relative mt-1">
                         <Listbox.Button className="relative w-full cursor-default rounded-lg bg-white dark:bg-dark dark:text-white py-2 pl-3 pr-10 text-left shadow-md focus:outline-none focus-visible:border-indigo-500 focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75 focus-visible:ring-offset-2 focus-visible:ring-offset-orange-300 sm:text-sm">
                             <span className="block truncate">{ selected || 'Filter Classes' }</span>

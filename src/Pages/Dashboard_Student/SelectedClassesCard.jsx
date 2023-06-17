@@ -30,7 +30,7 @@ const SelectedClassesCard = ( { classData, refetch } ) => {
         } ).then( async ( result ) => {
             if ( result.isConfirmed ) {
                 try {
-                    const response = await axiosSecure.delete( `/student/selected_classes/${ _id }` );
+                    const response = await axiosSecure.delete( `/users/student/selected_classes/${ _id }` );
                     if ( response.status === 200 ) {
                         toast.success( 'Class deleted successfully' );
                         refetch();

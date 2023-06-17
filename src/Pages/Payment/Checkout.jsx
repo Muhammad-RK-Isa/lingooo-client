@@ -5,7 +5,8 @@ import { DashboardContext } from '../../Layouts/Dashboard/Dashboard';
 import { CardElement, useElements, useStripe } from '@stripe/react-stripe-js';
 import { Button } from '@material-tailwind/react';
 
-const Checkout = () => {
+const Checkout = ( { classData } ) => {
+    const { title } = classData;
     const { selectedClass, setSelectedClass } = useContext( DashboardContext );
     const [ cardError, setCardError ] = useState( null );
     const stripe = useStripe();
@@ -37,9 +38,9 @@ const Checkout = () => {
             console.log( '[PaymentMethod]', paymentMethod );
         }
     };
-
     return (
-        <form onSubmit={ handleSubmit }>
+        <form onSubmit={ handleSubmit } className='flex flex-col gap-8'>
+            <h3>{ title }</h3>
             <CardElement
                 options={ {
                     style: {
@@ -56,12 +57,13 @@ const Checkout = () => {
                     },
                 } }
             />
-            
+
             <Button type="submit" disabled={ !stripe }>
                 Pay
             </Button>
         </form>
     );
+
 };
 
 export default Checkout;
