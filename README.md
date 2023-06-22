@@ -1,4 +1,5 @@
 # Lingooo Summer Camp School
+## [Live link](https://lingooo-international.web.app)
 
 Welcome to Lingooo, an online language school that offers a vibrant and interactive summer camp experience for students of all ages. This repository contains the source code and documentation for the Lingooo website. The website is built using React, Tailwind CSS, Tanstack Query, Node.js, Framer Motion, and React Hook Form.
 
