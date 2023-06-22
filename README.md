@@ -22,13 +22,13 @@ Before you begin, ensure that you have the following installed:
 1. Clone the repository:
 
    ```shell
-   git clone [https://github.com/your-username/lingooo-summer-camp](https://github.com/programming-hero-web-course1/b712-summer-camp-client-side-Muhammad-RK-Isa).git
+   git clone [https://github.com/Muhammad-RK-Isa/lingooo-client.git](https://github.com/Muhammad-RK-Isa/lingooo-client.git)
    ```
 
 2. Navigate to the project directory:
 
    ```shell
-   cd client
+   cd lingooo-client
    ```
 
 3. Install the dependencies:
