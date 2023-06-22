@@ -22,7 +22,7 @@ Before you begin, ensure that you have the following installed:
 1. Clone the repository:
 
    ```shell
-   git clone [https://github.com/Muhammad-RK-Isa/lingooo-client.git](https://github.com/Muhammad-RK-Isa/lingooo-client.git)
+   git clone https://github.com/Muhammad-RK-Isa/lingooo-client.git
    ```
 
 2. Navigate to the project directory:
