@@ -64,11 +64,10 @@ Before you begin, ensure that you have the following installed:
 ```
 ├── public/               # Public assets
 ├── src/                  # Source code
-│   ├── components/       # Reusable components
-│   ├── pages/            # Individual pages of the website
-│   ├── services/         # API services and utilities
-│   ├── styles/           # Custom styles and CSS
-│   ├── App.js            # Main application component
+│   ├── Components/       # Reusable components
+│   ├── Pages/            # Individual pages of the website
+│   ├── inedx.css         # Custom styles, CSS and Tailwindcss integration
+│   ├── Layouts           # Main application layouts
 │   └── index.js          # Entry point
 ├── .gitignore            # Git ignore configuration
 ├── package.json          # Project dependencies and scripts
